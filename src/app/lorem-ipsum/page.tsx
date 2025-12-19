@@ -3,16 +3,14 @@
 import { useState, useEffect, useMemo } from "react";
 import { LoremIpsum } from "lorem-ipsum";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { CopyButton } from "@/components/shared/copy-button";
+import { ToolActions } from "@/components/shared/tool-actions";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Trash2 } from "lucide-react";
 import { ActiveIcon } from "@/components/shared/active-icon";
 
 type TextType = "paragraph" | "sentence" | "word";
@@ -182,13 +180,7 @@ export default function LoremIpsumPage() {
             </Tooltip>
           </ToggleGroup>
 
-          <div className="ml-auto flex gap-2">
-            <Button variant="outline" onClick={handleClear}>
-              <Trash2 className="h-4 w-4 mr-2" />
-              Clear
-            </Button>
-            <CopyButton text={output} showLabel />
-          </div>
+          <ToolActions onClear={handleClear} copyText={output} className="ml-auto" />
         </div>
       </TooltipProvider>
 
