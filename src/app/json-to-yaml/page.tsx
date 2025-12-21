@@ -80,7 +80,7 @@ export default function JsonToYamlPage() {
       </div>
 
       <TooltipProvider>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-4">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="outline" onClick={handleExample}>
@@ -95,26 +95,26 @@ export default function JsonToYamlPage() {
         </div>
       </TooltipProvider>
 
-      <div className="grid grid-cols-2 gap-4 flex-1">
-        <div className="flex flex-col gap-2">
+      <div className="grid grid-cols-2 gap-4 flex-1 min-h-0">
+        <div className="flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">JSON Input</label>
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste your JSON here..."
-            className={`h-[calc(100vh-260px)] resize-none font-mono text-sm overflow-auto ${
+            className={`h-0 flex-1 resize-none font-mono text-sm overflow-auto ${
               error ? "border-red-500 focus-visible:ring-red-500" : ""
             }`}
           />
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">YAML Output</label>
           <Textarea
             value={error ? `Error: ${error}` : output}
             readOnly
             placeholder="YAML output will appear here..."
-            className={`h-[calc(100vh-260px)] resize-none font-mono text-sm overflow-auto bg-muted/50 ${
+            className={`h-0 flex-1 resize-none font-mono text-sm overflow-auto bg-muted/50 ${
               error ? "text-red-500" : ""
             }`}
           />

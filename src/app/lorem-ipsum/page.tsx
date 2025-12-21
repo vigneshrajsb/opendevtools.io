@@ -188,7 +188,7 @@ export default function LoremIpsumPage() {
         value={output}
         onChange={(e) => setOutput(e.target.value)}
         placeholder="Select a type above to generate lorem ipsum text..."
-        className="h-[calc(100vh-280px)] resize-none font-mono text-sm overflow-auto"
+        className="h-0 flex-1 resize-none font-mono text-sm overflow-auto"
         aria-label="Generated lorem ipsum text"
       />
     </div>

@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 import { ClearButton } from "@/components/shared/clear-button";
 import { CopyButton } from "@/components/shared/copy-button";
+import { IndentToggle, type IndentType } from "@/components/shared/indent-toggle";
 import { FileCode } from "lucide-react";
 
 const EXAMPLE_YAML = `name: John Doe
@@ -34,6 +35,7 @@ projects:
 export default function YamlToJsonPage() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
+  const [indent, setIndent] = useState<IndentType>("2");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -45,14 +47,23 @@ export default function YamlToJsonPage() {
 
     try {
       const parsed = jsYaml.load(input);
-      const json = JSON.stringify(parsed, null, 2);
-      setOutput(json);
+      let formatted: string;
+
+      if (indent === "minify") {
+        formatted = JSON.stringify(parsed);
+      } else if (indent === "tab") {
+        formatted = JSON.stringify(parsed, null, "\t");
+      } else {
+        formatted = JSON.stringify(parsed, null, Number(indent));
+      }
+
+      setOutput(formatted);
       setError(null);
     } catch (e) {
       setOutput("");
       setError(e instanceof Error ? e.message : "Invalid YAML");
     }
-  }, [input]);
+  }, [input, indent]);
 
   const handleClear = () => {
     setInput("");
@@ -74,7 +85,7 @@ export default function YamlToJsonPage() {
       </div>
 
       <TooltipProvider>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-4">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="outline" onClick={handleExample}>
@@ -85,30 +96,32 @@ export default function YamlToJsonPage() {
             <TooltipContent>Load sample YAML</TooltipContent>
           </Tooltip>
           <ClearButton onClick={handleClear} />
-          <CopyButton text={output} showLabel className="ml-auto" />
+
+          <IndentToggle value={indent} onValueChange={setIndent} className="ml-auto" />
+          <CopyButton text={output} showLabel />
         </div>
       </TooltipProvider>
 
-      <div className="grid grid-cols-2 gap-4 flex-1">
-        <div className="flex flex-col gap-2">
+      <div className="grid grid-cols-2 gap-4 flex-1 min-h-0">
+        <div className="flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">YAML Input</label>
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste your YAML here..."
-            className={`h-[calc(100vh-260px)] resize-none font-mono text-sm overflow-auto ${
+            className={`h-0 flex-1 resize-none font-mono text-sm overflow-auto ${
               error ? "border-red-500 focus-visible:ring-red-500" : ""
             }`}
           />
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">JSON Output</label>
           <Textarea
             value={error ? `Error: ${error}` : output}
             readOnly
             placeholder="JSON output will appear here..."
-            className={`h-[calc(100vh-260px)] resize-none font-mono text-sm overflow-auto bg-muted/50 ${
+            className={`h-0 flex-1 resize-none font-mono text-sm overflow-auto bg-muted/50 ${
               error ? "text-red-500" : ""
             }`}
           />

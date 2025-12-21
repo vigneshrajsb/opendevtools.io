@@ -105,7 +105,7 @@ export default function UrlEncodeDecodePage() {
       </TooltipProvider>
 
       <div className="grid grid-cols-2 gap-4 flex-1 min-h-0">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">
             {mode === "encode" ? "Text to Encode" : "URL to Decode"}
           </label>
@@ -117,13 +117,13 @@ export default function UrlEncodeDecodePage() {
                 ? "Enter text to encode..."
                 : "Enter URL-encoded text to decode..."
             }
-            className={`flex-1 resize-none font-mono text-sm h-[calc(100vh-280px)] overflow-auto ${
+            className={`h-0 flex-1 resize-none font-mono text-sm overflow-auto ${
               error ? "border-red-500 focus-visible:ring-red-500" : ""
             }`}
           />
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">
             {mode === "encode" ? "Encoded Output" : "Decoded Output"}
           </label>
@@ -135,7 +135,7 @@ export default function UrlEncodeDecodePage() {
                 ? "Encoded URL will appear here..."
                 : "Decoded text will appear here..."
             }
-            className={`flex-1 resize-none font-mono text-sm h-[calc(100vh-280px)] overflow-auto bg-muted/50 ${
+            className={`h-0 flex-1 resize-none font-mono text-sm overflow-auto bg-muted/50 ${
               error ? "text-red-500" : ""
             }`}
           />
