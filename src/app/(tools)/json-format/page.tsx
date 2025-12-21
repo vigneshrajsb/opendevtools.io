@@ -1,11 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { ToolActions } from "@/components/shared/tool-actions";
 import { IndentToggle, type IndentType } from "@/components/shared/indent-toggle";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, FileCode } from "lucide-react";
+
+const EXAMPLE_JSON = `{"name":"John Doe","age":30,"email":"john@example.com","isActive":true,"roles":["admin","user"],"address":{"street":"123 Main St","city":"New York","zipCode":"10001"}}`;
 
 export default function JsonFormatPage() {
   const [input, setInput] = useState("");
@@ -51,6 +59,10 @@ export default function JsonFormatPage() {
     setIsValid(false);
   };
 
+  const handleExample = () => {
+    setInput(EXAMPLE_JSON);
+  };
+
   return (
     <div className="flex flex-col h-full gap-4">
       <div className="space-y-1">
@@ -62,6 +74,15 @@ export default function JsonFormatPage() {
 
       <TooltipProvider>
         <div className="flex flex-wrap items-center gap-4">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline" onClick={handleExample}>
+                <FileCode className="h-4 w-4 mr-2" />
+                Example
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Load sample JSON</TooltipContent>
+          </Tooltip>
           <IndentToggle value={indent} onValueChange={setIndent} />
           <ToolActions onClear={handleClear} copyText={output} className="ml-auto" />
         </div>

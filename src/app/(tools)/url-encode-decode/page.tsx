@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
@@ -11,8 +12,12 @@ import {
 } from "@/components/ui/tooltip";
 import { ToolActions } from "@/components/shared/tool-actions";
 import { ActiveIcon } from "@/components/shared/active-icon";
+import { FileCode } from "lucide-react";
 
 type Mode = "encode" | "decode";
+
+const EXAMPLE_TEXT = "Hello World! Special chars: @#$%^&*() Query: name=John&age=30";
+const EXAMPLE_ENCODED = "Hello%20World!%20Special%20chars%3A%20%40%23%24%25%5E%26*()%20Query%3A%20name%3DJohn%26age%3D30";
 
 export default function UrlEncodeDecodePage() {
   const [input, setInput] = useState("");
@@ -47,6 +52,10 @@ export default function UrlEncodeDecodePage() {
     setError(null);
   };
 
+  const handleExample = () => {
+    setInput(mode === "encode" ? EXAMPLE_TEXT : EXAMPLE_ENCODED);
+  };
+
   const handleModeChange = (value: string) => {
     if (value) setMode(value as Mode);
   };
@@ -65,6 +74,17 @@ export default function UrlEncodeDecodePage() {
 
       <TooltipProvider>
         <div className="flex flex-wrap items-center gap-4">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline" onClick={handleExample}>
+                <FileCode className="h-4 w-4 mr-2" />
+                Example
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              {mode === "encode" ? "Load sample text to encode" : "Load sample URL-encoded text"}
+            </TooltipContent>
+          </Tooltip>
           <ToggleGroup
             type="single"
             variant="outline"
