@@ -51,6 +51,22 @@ src/
 - Import icons only from lucide-react
 - All tool output areas must include a copy button
 - Use `"use client"` directive only when necessary (hooks, interactivity)
+- DRY shared patterns: If a component/pattern is duplicated more than once, extract to `src/components/shared/`
+
+### Toolbar Layout (Uniform UX)
+
+Maintain consistent toolbar layout across all tools:
+
+```
+[Example] [Clear] [Toggles/Options...] ----ml-auto---- [Copy]
+```
+
+- **Example button** (if applicable): First, loads sample data
+- **Clear button**: After Example, resets input/output
+- **Toggles/Options**: Tool-specific controls (indent, mode, delimiter, etc.)
+- **Copy button**: Always last, right-aligned with `ml-auto`
+
+This layout ensures predictable UX - users always find Clear on the left and Copy on the right.
 
 ### URL Structure
 

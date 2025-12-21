@@ -11,53 +11,92 @@ import {
 } from "@/components/ui/tooltip";
 import { ClearButton } from "@/components/shared/clear-button";
 import { CopyButton } from "@/components/shared/copy-button";
-import { IndentToggle, type IndentType } from "@/components/shared/indent-toggle";
-import { CheckCircle2, FileCode } from "lucide-react";
+import { DelimiterToggle, type Delimiter } from "@/components/shared/delimiter-toggle";
+import { FileCode } from "lucide-react";
 
-const EXAMPLE_JSON = `{"name":"John Doe","age":30,"email":"john@example.com","isActive":true,"roles":["admin","user"],"address":{"street":"123 Main St","city":"New York","zipCode":"10001"}}`;
+const EXAMPLE_JSON = `[
+  {"name": "John Doe", "age": 30, "email": "john@example.com", "city": "New York"},
+  {"name": "Jane Smith", "age": 25, "email": "jane@example.com", "city": "Los Angeles"},
+  {"name": "Bob Johnson", "age": 35, "email": "bob@example.com", "city": "Chicago"}
+]`;
 
-export default function JsonFormatPage() {
+function jsonToCSV(data: unknown, delimiter: string): string {
+  if (!Array.isArray(data)) {
+    throw new Error("JSON must be an array of objects");
+  }
+
+  if (data.length === 0) {
+    throw new Error("Array is empty");
+  }
+
+  if (typeof data[0] !== "object" || data[0] === null) {
+    throw new Error("Array must contain objects");
+  }
+
+  const headers = Object.keys(data[0] as Record<string, unknown>);
+  const rows: string[] = [];
+
+  rows.push(headers.join(delimiter));
+
+  for (const item of data) {
+    if (typeof item !== "object" || item === null) {
+      throw new Error("All array items must be objects");
+    }
+
+    const row = headers.map((header) => {
+      const value = (item as Record<string, unknown>)[header];
+
+      if (value === null || value === undefined) {
+        return "";
+      }
+
+      const stringValue = String(value);
+
+      if (
+        stringValue.includes(delimiter) ||
+        stringValue.includes('"') ||
+        stringValue.includes("\n")
+      ) {
+        return `"${stringValue.replace(/"/g, '""')}"`;
+      }
+
+      return stringValue;
+    });
+
+    rows.push(row.join(delimiter));
+  }
+
+  return rows.join("\n");
+}
+
+export default function JsonToCsvPage() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [indent, setIndent] = useState<IndentType>("2");
+  const [delimiter, setDelimiter] = useState<Delimiter>(",");
   const [error, setError] = useState<string | null>(null);
-  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     if (!input.trim()) {
       setOutput("");
       setError(null);
-      setIsValid(false);
       return;
     }
 
     try {
       const parsed = JSON.parse(input);
-      let formatted: string;
-
-      if (indent === "minify") {
-        formatted = JSON.stringify(parsed);
-      } else if (indent === "tab") {
-        formatted = JSON.stringify(parsed, null, "\t");
-      } else {
-        formatted = JSON.stringify(parsed, null, Number(indent));
-      }
-
-      setOutput(formatted);
+      const csv = jsonToCSV(parsed, delimiter);
+      setOutput(csv);
       setError(null);
-      setIsValid(true);
     } catch (e) {
       setOutput("");
       setError(e instanceof Error ? e.message : "Invalid JSON");
-      setIsValid(false);
     }
-  }, [input, indent]);
+  }, [input, delimiter]);
 
   const handleClear = () => {
     setInput("");
     setOutput("");
     setError(null);
-    setIsValid(false);
   };
 
   const handleExample = () => {
@@ -67,9 +106,9 @@ export default function JsonFormatPage() {
   return (
     <div className="flex flex-col h-full gap-4">
       <div className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight">JSON Format</h1>
+        <h1 className="text-2xl font-bold tracking-tight">JSON to CSV</h1>
         <p className="text-sm text-muted-foreground">
-          Format and validate JSON data
+          Convert JSON array to CSV format
         </p>
       </div>
 
@@ -82,29 +121,21 @@ export default function JsonFormatPage() {
                 Example
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Load sample JSON</TooltipContent>
+            <TooltipContent>Load sample JSON array</TooltipContent>
           </Tooltip>
           <ClearButton onClick={handleClear} />
-          <IndentToggle value={indent} onValueChange={setIndent} />
-          <CopyButton text={output} showLabel className="ml-auto" />
+          <DelimiterToggle value={delimiter} onValueChange={setDelimiter} className="ml-auto" />
+          <CopyButton text={output} showLabel />
         </div>
       </TooltipProvider>
 
       <div className="grid grid-cols-2 gap-4 flex-1 min-h-0">
         <div className="flex flex-col gap-2 min-h-0">
-          <div className="flex items-center gap-2">
-            <label className="text-sm font-medium">Input JSON</label>
-            {isValid && (
-              <span className="flex items-center gap-1 text-xs text-green-500">
-                <CheckCircle2 className="h-3 w-3" />
-                Valid
-              </span>
-            )}
-          </div>
+          <label className="text-sm font-medium">JSON Input</label>
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Paste your JSON here..."
+            placeholder="Paste your JSON array here..."
             className={`h-0 flex-1 resize-none font-mono text-sm overflow-auto ${
               error ? "border-red-500 focus-visible:ring-red-500" : ""
             }`}
@@ -112,11 +143,11 @@ export default function JsonFormatPage() {
         </div>
 
         <div className="flex flex-col gap-2 min-h-0">
-          <label className="text-sm font-medium">Formatted Output</label>
+          <label className="text-sm font-medium">CSV Output</label>
           <Textarea
             value={error ? `Error: ${error}` : output}
             readOnly
-            placeholder="Formatted JSON will appear here..."
+            placeholder="CSV output will appear here..."
             className={`h-0 flex-1 resize-none font-mono text-sm overflow-auto bg-muted/50 ${
               error ? "text-red-500" : ""
             }`}

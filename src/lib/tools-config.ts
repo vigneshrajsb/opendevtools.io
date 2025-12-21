@@ -1,6 +1,7 @@
 import {
   FileJson,
   FileCode,
+  FileSpreadsheet,
   Link2,
   GitCompare,
   Type,
@@ -33,6 +34,18 @@ export const tools: Tool[] = [
     path: "/json-format",
     description: "Format and validate JSON data",
     icon: FileCode,
+  },
+  {
+    name: "CSV to JSON",
+    path: "/csv-to-json",
+    description: "Convert CSV data to JSON format",
+    icon: FileSpreadsheet,
+  },
+  {
+    name: "JSON to CSV",
+    path: "/json-to-csv",
+    description: "Convert JSON array to CSV format",
+    icon: FileSpreadsheet,
   },
   {
     name: "URL Encode/Decode",

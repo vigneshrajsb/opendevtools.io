@@ -15,6 +15,8 @@ Free, open-source developer tools. All processing happens in your browser.
 - **JSON to YAML** - Convert JSON data to YAML format
 - **YAML to JSON** - Convert YAML data to JSON format
 - **JSON Format** - Format and validate JSON data
+- **CSV to JSON** - Convert CSV data to JSON format
+- **JSON to CSV** - Convert JSON array to CSV format
 - **URL Encode/Decode** - Encode or decode URL strings
 - **Text Diff** - Compare two text blocks and see differences
 - **Lorem Ipsum** - Generate placeholder text

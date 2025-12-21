@@ -4,7 +4,8 @@ import { useState, useEffect, useMemo } from "react";
 import { LoremIpsum } from "lorem-ipsum";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Textarea } from "@/components/ui/textarea";
-import { ToolActions } from "@/components/shared/tool-actions";
+import { ClearButton } from "@/components/shared/clear-button";
+import { CopyButton } from "@/components/shared/copy-button";
 import {
   Tooltip,
   TooltipContent,
@@ -84,6 +85,7 @@ export default function LoremIpsumPage() {
 
       <TooltipProvider>
         <div className="flex flex-wrap items-center gap-4">
+          <ClearButton onClick={handleClear} />
           <ToggleGroup
             type="single"
             variant="outline"
@@ -180,7 +182,7 @@ export default function LoremIpsumPage() {
             </Tooltip>
           </ToggleGroup>
 
-          <ToolActions onClear={handleClear} copyText={output} className="ml-auto" />
+          <CopyButton text={output} showLabel className="ml-auto" />
         </div>
       </TooltipProvider>
 

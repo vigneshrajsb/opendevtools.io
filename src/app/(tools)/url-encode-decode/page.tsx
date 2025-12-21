@@ -10,7 +10,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ToolActions } from "@/components/shared/tool-actions";
+import { ClearButton } from "@/components/shared/clear-button";
+import { CopyButton } from "@/components/shared/copy-button";
 import { ActiveIcon } from "@/components/shared/active-icon";
 import { FileCode } from "lucide-react";
 
@@ -85,6 +86,7 @@ export default function UrlEncodeDecodePage() {
               {mode === "encode" ? "Load sample text to encode" : "Load sample URL-encoded text"}
             </TooltipContent>
           </Tooltip>
+          <ClearButton onClick={handleClear} />
           <ToggleGroup
             type="single"
             variant="outline"
@@ -120,7 +122,7 @@ export default function UrlEncodeDecodePage() {
             </Tooltip>
           </ToggleGroup>
 
-          <ToolActions onClear={handleClear} copyText={output} className="ml-auto" />
+          <CopyButton text={output} showLabel className="ml-auto" />
         </div>
       </TooltipProvider>
 
