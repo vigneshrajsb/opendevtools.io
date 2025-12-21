@@ -43,7 +43,7 @@ src/
 - All tools process data client-side only
 - No login, authentication, or user tracking
 - No external API calls for data processing
-- Desktop-only UI (mobile shows warning message)
+- Responsive UI (works on desktop and mobile)
 
 ### Component Guidelines
 
@@ -106,5 +106,5 @@ When implementing specific tools, these packages are available:
 - Tailwind v4 uses CSS-first config (no tailwind.config.ts)
 - shadcn/ui components use OKLCH color space
 - Sidebar state persists via cookies
-- The app is hidden on mobile viewports (<768px)
+- Sidebar collapses on mobile viewports
 - Default theme is dark mode

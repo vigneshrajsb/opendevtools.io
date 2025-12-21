@@ -11,26 +11,53 @@ import {
   SidebarMenuItem,
   SidebarHeader,
   SidebarFooter,
+  useSidebar,
 } from "@/components/ui/sidebar";
+import { Separator } from "@/components/ui/separator";
 import { tools } from "@/lib/tools-config";
+import { PanelLeft, PanelLeftClose } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const { toggleSidebar, open } = useSidebar();
 
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <div className="flex items-center gap-2 px-2 py-1">
-          <span className="font-mono text-sm font-bold">[*]</span>
-          <span className="font-semibold group-data-[collapsible=icon]:hidden">
-            Tools
+        <Link
+          href="/"
+          className="flex items-center gap-2 px-2 py-2 hover:opacity-80 transition-opacity"
+        >
+          <span className="font-mono text-sm font-bold">
+            [<span className="text-primary">*</span>]
           </span>
-        </div>
+          <span className="text-base font-semibold group-data-[collapsible=icon]:hidden">
+            OpenDevTools
+          </span>
+        </Link>
+        <Separator />
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              onClick={toggleSidebar}
+              tooltip={open ? "Collapse Sidebar" : "Expand Sidebar"}
+            >
+              {open ? (
+                <>
+                  <PanelLeftClose />
+                  <span>Collapse Sidebar</span>
+                </>
+              ) : (
+                <PanelLeft />
+              )}
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="py-2">
         <SidebarGroup>
           <SidebarGroupLabel>Developer Tools</SidebarGroupLabel>
           <SidebarGroupContent>
