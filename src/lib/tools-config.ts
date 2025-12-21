@@ -23,6 +23,12 @@ export const tools: Tool[] = [
     icon: FileJson,
   },
   {
+    name: "YAML to JSON",
+    path: "/yaml-to-json",
+    description: "Convert YAML data to JSON format",
+    icon: FileCode,
+  },
+  {
     name: "JSON Format",
     path: "/json-format",
     description: "Format and validate JSON data",
