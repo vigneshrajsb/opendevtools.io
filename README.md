@@ -12,15 +12,13 @@ Free, open-source developer tools. All processing happens in your browser.
 
 ## Available Tools
 
-- **JSON to YAML** - Convert JSON data to YAML format
-- **YAML to JSON** - Convert YAML data to JSON format
-- **JSON Format** - Format and validate JSON data
-- **CSV to JSON** - Convert CSV data to JSON format
-- **JSON to CSV** - Convert JSON array to CSV format
-- **URL Encode/Decode** - Encode or decode URL strings
-- **Text Diff** - Compare two text blocks and see differences
-- **Lorem Ipsum** - Generate placeholder text
-- **Markdown Preview** - Preview markdown with live rendering
+- [**JSON to YAML**](https://opendevtools.io/json-to-yaml) - Convert JSON data to YAML format
+- [**YAML to JSON**](https://opendevtools.io/yaml-to-json) - Convert YAML data to JSON format
+- [**JSON Format**](https://opendevtools.io/json-format) - Format and validate JSON data
+- [**CSV to JSON**](https://opendevtools.io/csv-to-json) - Convert CSV data to JSON format
+- [**JSON to CSV**](https://opendevtools.io/json-to-csv) - Convert JSON array to CSV format
+- [**URL Encode/Decode**](https://opendevtools.io/url-encode-decode) - Encode or decode URL strings
+- [**Lorem Ipsum**](https://opendevtools.io/lorem-ipsum) - Generate placeholder text
 
 ## Tech Stack
 
@@ -40,8 +38,8 @@ Free, open-source developer tools. All processing happens in your browser.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/opendevtools.git
-cd opendevtools
+git clone https://github.com/vigneshrajsb/opendevtools.io.git
+cd opendevtools.io
 
 # Install dependencies
 pnpm install

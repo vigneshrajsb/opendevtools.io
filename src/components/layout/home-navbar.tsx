@@ -1,7 +1,5 @@
-import { ModeToggle } from "@/components/theme/mode-toggle";
-import { Button } from "@/components/ui/button";
-import { Wrench, Github } from "lucide-react";
 import Link from "next/link";
+import { NavLinks } from "./nav-links";
 
 export function HomeNavbar() {
   return (
@@ -13,25 +11,7 @@ export function HomeNavbar() {
         <span className="font-semibold">OpenDevTools</span>
       </Link>
 
-      <div className="ml-auto flex items-center gap-1">
-        <Button variant="ghost" size="icon" asChild>
-          <Link href="/toolbox">
-            <Wrench className="h-4 w-4" />
-            <span className="sr-only">Toolbox</span>
-          </Link>
-        </Button>
-        <Button variant="ghost" size="icon" asChild>
-          <a
-            href="https://github.com/vigneshrajsb/opendevtools.io"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Github className="h-4 w-4" />
-            <span className="sr-only">GitHub Repository</span>
-          </a>
-        </Button>
-        <ModeToggle />
-      </div>
+      <NavLinks />
     </header>
   );
 }
