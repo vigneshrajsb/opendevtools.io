@@ -22,7 +22,7 @@ export function HomeNavbar() {
         </Button>
         <Button variant="ghost" size="icon" asChild>
           <a
-            href="https://github.com/vigneshrajsb/devtools"
+            href="https://github.com/vigneshrajsb/opendevtools.io"
             target="_blank"
             rel="noopener noreferrer"
           >

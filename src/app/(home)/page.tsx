@@ -47,7 +47,7 @@ export default function Home() {
           </Button>
           <Button asChild variant="outline" size="lg" className="gap-2">
             <a
-              href="https://github.com/vigneshrajsb/devtools"
+              href="https://github.com/vigneshrajsb/opendevtools.io"
               target="_blank"
               rel="noopener noreferrer"
             >
