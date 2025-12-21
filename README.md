@@ -13,6 +13,7 @@ Free, open-source developer tools. All processing happens in your browser.
 ## Available Tools
 
 - **JSON to YAML** - Convert JSON data to YAML format
+- **YAML to JSON** - Convert YAML data to JSON format
 - **JSON Format** - Format and validate JSON data
 - **URL Encode/Decode** - Encode or decode URL strings
 - **Text Diff** - Compare two text blocks and see differences
@@ -30,7 +31,7 @@ Free, open-source developer tools. All processing happens in your browser.
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 22+ (see `.nvmrc`)
 - pnpm
 
 ### Installation
