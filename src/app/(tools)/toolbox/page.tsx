@@ -7,11 +7,11 @@ import {
 import { tools } from "@/lib/tools-config";
 import Link from "next/link";
 
-export default function Home() {
+export default function ToolboxPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">OpenDevTools</h1>
+        <h1 className="text-3xl font-bold tracking-tight">All Tools</h1>
         <p className="text-muted-foreground">
           Free, open-source developer tools. All processing happens in your
           browser.
