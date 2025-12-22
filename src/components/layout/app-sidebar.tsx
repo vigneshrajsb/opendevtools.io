@@ -185,10 +185,10 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContent className="py-2">
-        {favoriteTools.length > 0 && (
-          <SidebarGroup>
-            <SidebarGroupLabel>Favorites</SidebarGroupLabel>
-            <SidebarGroupContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Favorites</SidebarGroupLabel>
+          <SidebarGroupContent>
+            {favoriteTools.length > 0 ? (
               <DndContext
                 sensors={sensors}
                 collisionDetection={closestCenter}
@@ -210,9 +210,13 @@ export function AppSidebar() {
                   </SidebarMenu>
                 </SortableContext>
               </DndContext>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        )}
+            ) : (
+              <p className="px-2 py-1.5 text-sm text-muted-foreground">
+                No favorites yet.
+              </p>
+            )}
+          </SidebarGroupContent>
+        </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel>Developer Tools</SidebarGroupLabel>
           <SidebarGroupContent>
