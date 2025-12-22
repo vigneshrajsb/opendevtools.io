@@ -17,6 +17,8 @@ interface ToolPreferencesState {
   setToolInput: (path: string, input: string) => void;
   setToolSetting: (path: string, key: string, value: string) => void;
   clearToolState: (path: string) => void;
+  resetFavorites: () => void;
+  resetToolStates: () => void;
 }
 
 export const useToolPreferences = create<ToolPreferencesState>()(
@@ -65,6 +67,8 @@ export const useToolPreferences = create<ToolPreferencesState>()(
           const { [path]: _, ...rest } = state.toolStates;
           return { toolStates: rest };
         }),
+      resetFavorites: () => set({ favorites: [] }),
+      resetToolStates: () => set({ toolStates: {} }),
     }),
     { name: "tool-preferences" }
   )

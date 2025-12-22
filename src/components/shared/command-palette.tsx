@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { Search } from "lucide-react";
+import { Search, RotateCcw, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   CommandDialog,
@@ -11,8 +11,10 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
+  CommandSeparator,
 } from "@/components/ui/command";
 import { tools } from "@/lib/tools-config";
+import { useToolPreferences } from "@/lib/stores/tool-preferences";
 
 const CommandPaletteContext = React.createContext<{
   open: boolean;
@@ -36,6 +38,8 @@ export function CommandPaletteProvider({
 }) {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
+  const resetFavorites = useToolPreferences((state) => state.resetFavorites);
+  const resetToolStates = useToolPreferences((state) => state.resetToolStates);
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -52,6 +56,20 @@ export function CommandPaletteProvider({
   const handleSelect = (path: string) => {
     setOpen(false);
     router.push(path);
+  };
+
+  const handleResetFavorites = () => {
+    if (window.confirm("Remove all favorites? This cannot be undone.")) {
+      resetFavorites();
+      setOpen(false);
+    }
+  };
+
+  const handleResetToolCache = () => {
+    if (window.confirm("Clear all tool input and settings cache? This cannot be undone.")) {
+      resetToolStates();
+      setOpen(false);
+    }
   };
 
   return (
@@ -82,6 +100,33 @@ export function CommandPaletteProvider({
                 </div>
               </CommandItem>
             ))}
+          </CommandGroup>
+          <CommandSeparator />
+          <CommandGroup heading="Settings">
+            <CommandItem
+              value="reset favorites clear bookmarks"
+              onSelect={handleResetFavorites}
+            >
+              <Trash2 className="h-4 w-4" />
+              <div className="flex flex-col">
+                <span>Reset Favorites</span>
+                <span className="text-xs text-muted-foreground">
+                  Remove all bookmarked tools
+                </span>
+              </div>
+            </CommandItem>
+            <CommandItem
+              value="reset tool cache clear input settings"
+              onSelect={handleResetToolCache}
+            >
+              <RotateCcw className="h-4 w-4" />
+              <div className="flex flex-col">
+                <span>Reset Tool Cache</span>
+                <span className="text-xs text-muted-foreground">
+                  Clear saved input and settings for all tools
+                </span>
+              </div>
+            </CommandItem>
           </CommandGroup>
         </CommandList>
       </CommandDialog>
