@@ -66,6 +66,36 @@ pnpm lint     # Run ESLint
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+## Credits
+
+OpenDevTools is built on the shoulders of giants. We're grateful to the open source community and the maintainers who make projects like this possible.
+
+### Core Technologies
+- [Next.js](https://github.com/vercel/next.js) - The React framework
+- [React](https://github.com/facebook/react) - UI library
+- [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) - Utility-first CSS
+- [shadcn/ui](https://github.com/shadcn-ui/ui) - Beautiful UI components
+- [Lucide](https://github.com/lucide-icons/lucide) - Icon library
+
+### Libraries We Love
+- [Zustand](https://github.com/pmndrs/zustand) - State management
+- [cmdk](https://github.com/pacocoursey/cmdk) - Command menu
+- [dnd-kit](https://github.com/clauderic/dnd-kit) - Drag and drop
+- [js-yaml](https://github.com/nodeca/js-yaml) - YAML parsing
+- [lorem-ipsum](https://github.com/knicklabs/lorem-ipsum.js) - Text generation
+- [diff](https://github.com/kpdecker/jsdiff) - Text diffing
+
+### Support Open Source
+
+Open source software powers the modern web. If you find these tools useful, consider giving back:
+
+- **Star** the repositories of projects you use
+- **Sponsor** maintainers on [GitHub Sponsors](https://github.com/sponsors)
+- **Contribute** bug reports, documentation, or code
+- **Share** open source projects with your network
+
+Every contribution, no matter how small, helps keep the open source ecosystem thriving.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
