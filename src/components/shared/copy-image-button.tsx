@@ -70,21 +70,28 @@ export function CopyImageButton({
       // Wait for frame to render
       await new Promise((resolve) => requestAnimationFrame(resolve));
 
-      const blob = await toBlob(clone, {
-        backgroundColor: bgColor,
-        pixelRatio,
-      });
-
-      if (!blob) throw new Error("Failed to capture image");
-
       // Try clipboard API first (requires HTTPS)
+      // Safari requires ClipboardItem to be created synchronously with a Promise
       if (navigator.clipboard?.write && window.isSecureContext) {
+        const blobPromise = toBlob(clone, {
+          backgroundColor: bgColor,
+          pixelRatio,
+        }).then((blob) => {
+          if (!blob) throw new Error("Failed to capture image");
+          return blob;
+        });
+
         await navigator.clipboard.write([
-          new ClipboardItem({ "image/png": blob }),
+          new ClipboardItem({ "image/png": blobPromise }),
         ]);
         setStatus("copied");
       } else {
         // Fallback: download the image
+        const blob = await toBlob(clone, {
+          backgroundColor: bgColor,
+          pixelRatio,
+        });
+        if (!blob) throw new Error("Failed to capture image");
         downloadBlob(blob, filename);
         setStatus("downloaded");
       }
