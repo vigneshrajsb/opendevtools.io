@@ -47,7 +47,7 @@ export const tools = [
     icon: Link2,
   },
   {
-    name: "Text Diff",
+    name: "Text Diff Checker",
     path: "/text-diff",
     description: "Compare two text blocks and see differences",
     icon: GitCompare,
