@@ -13,13 +13,18 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ActiveIcon } from "@/components/shared/active-icon";
+import { useToolState } from "@/hooks/use-tool-state";
 
 type TextType = "paragraph" | "sentence" | "word";
 type CountMultiplier = "1" | "10" | "100";
 
 export default function LoremIpsumPage() {
-  const [textType, setTextType] = useState<TextType | "">("");
-  const [count, setCount] = useState<CountMultiplier>("1");
+  const { settings, setSetting, clear } = useToolState("/lorem-ipsum");
+  const textType = (settings.textType as TextType) || "";
+  const setTextType = (value: TextType | "") => setSetting("textType", value);
+  const count = (settings.count as CountMultiplier) || "1";
+  const setCount = (value: CountMultiplier) => setSetting("count", value);
+
   const [output, setOutput] = useState("");
 
   const lorem = useMemo(
@@ -57,8 +62,8 @@ export default function LoremIpsumPage() {
   }, [textType, count]);
 
   const handleClear = () => {
+    clear();
     setOutput("");
-    setTextType("");
   };
 
   const handleTypeChange = (value: string) => {

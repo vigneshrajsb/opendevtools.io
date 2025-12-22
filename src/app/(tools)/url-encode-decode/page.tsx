@@ -13,6 +13,7 @@ import {
 import { ClearButton } from "@/components/shared/clear-button";
 import { CopyButton } from "@/components/shared/copy-button";
 import { ActiveIcon } from "@/components/shared/active-icon";
+import { useToolState } from "@/hooks/use-tool-state";
 import { FileCode } from "lucide-react";
 
 type Mode = "encode" | "decode";
@@ -21,9 +22,11 @@ const EXAMPLE_TEXT = "Hello World! Special chars: @#$%^&*() Query: name=John&age
 const EXAMPLE_ENCODED = "Hello%20World!%20Special%20chars%3A%20%40%23%24%25%5E%26*()%20Query%3A%20name%3DJohn%26age%3D30";
 
 export default function UrlEncodeDecodePage() {
-  const [input, setInput] = useState("");
+  const { input, setInput, settings, setSetting, clear } = useToolState("/url-encode-decode");
+  const mode = (settings.mode as Mode) || "encode";
+  const setMode = (value: Mode) => setSetting("mode", value);
+
   const [output, setOutput] = useState("");
-  const [mode, setMode] = useState<Mode>("encode");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -48,7 +51,7 @@ export default function UrlEncodeDecodePage() {
   }, [input, mode]);
 
   const handleClear = () => {
-    setInput("");
+    clear();
     setOutput("");
     setError(null);
   };

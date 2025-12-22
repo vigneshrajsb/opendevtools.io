@@ -12,6 +12,7 @@ import {
 import { ClearButton } from "@/components/shared/clear-button";
 import { CopyButton } from "@/components/shared/copy-button";
 import { DelimiterToggle, type Delimiter } from "@/components/shared/delimiter-toggle";
+import { useToolState } from "@/hooks/use-tool-state";
 import { FileCode } from "lucide-react";
 
 const EXAMPLE_JSON = `[
@@ -70,9 +71,11 @@ function jsonToCSV(data: unknown, delimiter: string): string {
 }
 
 export default function JsonToCsvPage() {
-  const [input, setInput] = useState("");
+  const { input, setInput, settings, setSetting, clear } = useToolState("/json-to-csv");
+  const delimiter = (settings.delimiter as Delimiter) || ",";
+  const setDelimiter = (value: Delimiter) => setSetting("delimiter", value);
+
   const [output, setOutput] = useState("");
-  const [delimiter, setDelimiter] = useState<Delimiter>(",");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -94,7 +97,7 @@ export default function JsonToCsvPage() {
   }, [input, delimiter]);
 
   const handleClear = () => {
-    setInput("");
+    clear();
     setOutput("");
     setError(null);
   };

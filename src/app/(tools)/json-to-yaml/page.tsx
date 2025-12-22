@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 import { ClearButton } from "@/components/shared/clear-button";
 import { CopyButton } from "@/components/shared/copy-button";
+import { useToolState } from "@/hooks/use-tool-state";
 import { FileCode } from "lucide-react";
 
 const EXAMPLE_JSON = `{
@@ -38,7 +39,7 @@ const EXAMPLE_JSON = `{
 }`;
 
 export default function JsonToYamlPage() {
-  const [input, setInput] = useState("");
+  const { input, setInput, clear } = useToolState("/json-to-yaml");
   const [output, setOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -61,7 +62,7 @@ export default function JsonToYamlPage() {
   }, [input]);
 
   const handleClear = () => {
-    setInput("");
+    clear();
     setOutput("");
     setError(null);
   };

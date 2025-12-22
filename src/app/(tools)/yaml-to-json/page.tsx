@@ -13,6 +13,7 @@ import {
 import { ClearButton } from "@/components/shared/clear-button";
 import { CopyButton } from "@/components/shared/copy-button";
 import { IndentToggle, type IndentType } from "@/components/shared/indent-toggle";
+import { useToolState } from "@/hooks/use-tool-state";
 import { FileCode } from "lucide-react";
 
 const EXAMPLE_YAML = `name: John Doe
@@ -33,9 +34,11 @@ projects:
     status: in-progress`;
 
 export default function YamlToJsonPage() {
-  const [input, setInput] = useState("");
+  const { input, setInput, settings, setSetting, clear } = useToolState("/yaml-to-json");
+  const indent = (settings.indent as IndentType) || "2";
+  const setIndent = (value: IndentType) => setSetting("indent", value);
+
   const [output, setOutput] = useState("");
-  const [indent, setIndent] = useState<IndentType>("2");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -66,7 +69,7 @@ export default function YamlToJsonPage() {
   }, [input, indent]);
 
   const handleClear = () => {
-    setInput("");
+    clear();
     setOutput("");
     setError(null);
   };

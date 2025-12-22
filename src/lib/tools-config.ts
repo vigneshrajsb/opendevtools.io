@@ -9,14 +9,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-export interface Tool {
-  name: string;
-  path: string;
-  description: string;
-  icon: LucideIcon;
-}
-
-export const tools: Tool[] = [
+export const tools = [
   {
     name: "JSON to YAML",
     path: "/json-to-yaml",
@@ -71,4 +64,7 @@ export const tools: Tool[] = [
     description: "Preview markdown with live rendering",
     icon: FileText,
   },
-];
+] as const;
+
+export type ToolPath = (typeof tools)[number]["path"];
+export type Tool = (typeof tools)[number];

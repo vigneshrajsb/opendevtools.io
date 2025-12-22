@@ -12,14 +12,17 @@ import {
 import { ClearButton } from "@/components/shared/clear-button";
 import { CopyButton } from "@/components/shared/copy-button";
 import { IndentToggle, type IndentType } from "@/components/shared/indent-toggle";
+import { useToolState } from "@/hooks/use-tool-state";
 import { CheckCircle2, FileCode } from "lucide-react";
 
 const EXAMPLE_JSON = `{"name":"John Doe","age":30,"email":"john@example.com","isActive":true,"roles":["admin","user"],"address":{"street":"123 Main St","city":"New York","zipCode":"10001"}}`;
 
 export default function JsonFormatPage() {
-  const [input, setInput] = useState("");
+  const { input, setInput, settings, setSetting, clear } = useToolState("/json-format");
+  const indent = (settings.indent as IndentType) || "2";
+  const setIndent = (value: IndentType) => setSetting("indent", value);
+
   const [output, setOutput] = useState("");
-  const [indent, setIndent] = useState<IndentType>("2");
   const [error, setError] = useState<string | null>(null);
   const [isValid, setIsValid] = useState(false);
 
@@ -54,7 +57,7 @@ export default function JsonFormatPage() {
   }, [input, indent]);
 
   const handleClear = () => {
-    setInput("");
+    clear();
     setOutput("");
     setError(null);
     setIsValid(false);

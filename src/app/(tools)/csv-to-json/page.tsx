@@ -13,6 +13,7 @@ import { ClearButton } from "@/components/shared/clear-button";
 import { CopyButton } from "@/components/shared/copy-button";
 import { IndentToggle, type IndentType } from "@/components/shared/indent-toggle";
 import { DelimiterToggle, type Delimiter } from "@/components/shared/delimiter-toggle";
+import { useToolState } from "@/hooks/use-tool-state";
 import { FileCode } from "lucide-react";
 
 const EXAMPLE_CSV = `name,age,email,city
@@ -75,10 +76,13 @@ function parseCSVLine(line: string, delimiter: string): string[] {
 }
 
 export default function CsvToJsonPage() {
-  const [input, setInput] = useState("");
+  const { input, setInput, settings, setSetting, clear } = useToolState("/csv-to-json");
+  const delimiter = (settings.delimiter as Delimiter) || ",";
+  const setDelimiter = (value: Delimiter) => setSetting("delimiter", value);
+  const indent = (settings.indent as IndentType) || "2";
+  const setIndent = (value: IndentType) => setSetting("indent", value);
+
   const [output, setOutput] = useState("");
-  const [delimiter, setDelimiter] = useState<Delimiter>(",");
-  const [indent, setIndent] = useState<IndentType>("2");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -109,7 +113,7 @@ export default function CsvToJsonPage() {
   }, [input, delimiter, indent]);
 
   const handleClear = () => {
-    setInput("");
+    clear();
     setOutput("");
     setError(null);
   };

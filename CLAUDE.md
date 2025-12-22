@@ -88,7 +88,7 @@ This layout ensures predictable UX - users always find Clear on the left and Cop
 
 ## Adding New Tools
 
-1. Create route folder: `src/app/[tool-name]/page.tsx`
+1. Create route folder: `src/app/(tools)/[tool-name]/page.tsx`
 2. Add tool to `src/lib/tools-config.ts` with:
    - name: Display name
    - path: URL path (root level)
@@ -98,7 +98,42 @@ This layout ensures predictable UX - users always find Clear on the left and Cop
    - Input area (textarea or appropriate input)
    - Output area with CopyButton
    - Error handling for invalid input
+   - **State persistence using `useToolState` hook** (see below)
 4. All processing must happen client-side
+
+### State Persistence
+
+All tools must persist input and settings to localStorage using the `useToolState` hook. This ensures users can navigate away and return to their work.
+
+```typescript
+import { useToolState } from "@/hooks/use-tool-state";
+
+export default function MyToolPage() {
+  // Use persisted state instead of useState for input and settings
+  const { input, setInput, settings, setSetting, clear } = useToolState("/my-tool");
+
+  // Derive settings with defaults
+  const indent = (settings.indent as IndentType) || "2";
+  const setIndent = (value: IndentType) => setSetting("indent", value);
+
+  // Output stays as local state (regenerates from input via useEffect)
+  const [output, setOutput] = useState("");
+
+  // Clear button should use the clear function
+  const handleClear = () => {
+    clear();  // Clears persisted input + settings
+    setOutput("");
+  };
+
+  // ... rest of component
+}
+```
+
+**Key points:**
+- `input` and `settings` are persisted to localStorage
+- `output` stays as local useState (regenerates via useEffect)
+- Tool path must match the path in `tools-config.ts` (type-safe via `ToolPath`)
+- `clear()` resets both input and settings for the tool
 
 ## Commands
 
