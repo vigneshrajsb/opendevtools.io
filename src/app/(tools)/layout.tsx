@@ -16,7 +16,7 @@ export default async function ToolsLayout({
       <AppSidebar />
       <main className="flex-1 flex flex-col h-screen overflow-hidden">
         <Navbar />
-        <div className="flex-1 p-6 overflow-hidden">{children}</div>
+        <div className="flex-1 p-6 overflow-auto">{children}</div>
       </main>
     </SidebarProvider>
   );
