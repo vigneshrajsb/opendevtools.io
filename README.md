@@ -8,6 +8,9 @@ Free, open-source developer tools. All processing happens in your browser.
 - **No Tracking**: No analytics, no cookies (except for UI preferences)
 - **No Login Required**: Just open and use
 - **Dark Mode**: Toggle between light and dark themes
+- **Command Bar**: Press `Cmd+K` (or `Ctrl+K`) to quickly search and navigate to any tool
+- **Favorites**: Bookmark your most-used tools for quick access in the sidebar
+- **State Persistence**: Your input and settings are saved locally, so you can pick up where you left off
 - **Open Source**: MIT licensed
 
 ## Available Tools
