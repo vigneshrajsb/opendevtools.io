@@ -4,10 +4,12 @@ import { ModeToggle } from "@/components/theme/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Wrench, Github } from "lucide-react";
 import Link from "next/link";
+import { CommandTrigger } from "@/components/shared/command-palette";
 
 export function NavLinks() {
   return (
     <div className="ml-auto flex items-center gap-2">
+      <CommandTrigger />
       <Button variant="outline" size="icon" className="md:w-auto md:px-3" asChild>
         <Link href="/toolbox">
           <Wrench className="h-4 w-4" />
