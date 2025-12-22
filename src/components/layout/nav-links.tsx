@@ -8,22 +8,32 @@ import { CommandTrigger } from "@/components/shared/command-palette";
 
 export function NavLinks() {
   return (
-    <div className="ml-auto flex items-center gap-2">
+    <div className="ml-auto flex items-center gap-3">
       <CommandTrigger />
-      <Button variant="outline" size="icon" className="md:w-auto md:px-3" asChild>
+      <Button
+        variant="outline"
+        size="icon"
+        className="md:w-auto md:px-3"
+        asChild
+      >
         <Link href="/toolbox">
           <Wrench className="h-4 w-4" />
-          <span className="hidden md:inline ml-2">Toolbox</span>
+          <span className="hidden md:inline">Toolbox</span>
         </Link>
       </Button>
-      <Button variant="outline" size="icon" className="md:w-auto md:px-3" asChild>
+      <Button
+        variant="outline"
+        size="icon"
+        className="md:w-auto md:px-3"
+        asChild
+      >
         <a
           href="https://github.com/vigneshrajsb/opendevtools.io"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Github className="h-4 w-4" />
-          <span className="hidden md:inline ml-2">GitHub</span>
+          <span className="hidden md:inline">GitHub</span>
         </a>
       </Button>
       <ModeToggle />
