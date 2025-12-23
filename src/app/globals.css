@@ -169,3 +169,19 @@
 .prose ul ul {
   list-style-type: circle;
 }
+
+/* CodeMirror theme overrides */
+.cm-editor {
+  background-color: oklch(var(--background)) !important;
+  height: 100%;
+}
+.cm-scroller {
+  overflow: auto !important;
+}
+.cm-gutters {
+  background-color: oklch(var(--background)) !important;
+  border-right: 1px solid oklch(var(--border));
+}
+.cm-activeLineGutter {
+  background-color: oklch(var(--accent)) !important;
+}

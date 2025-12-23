@@ -6,6 +6,7 @@ import {
   GitCompare,
   Type,
   FileText,
+  Code2,
   type LucideIcon,
 } from "lucide-react";
 
@@ -63,6 +64,12 @@ export const tools = [
     path: "/markdown-preview",
     description: "Preview markdown with live rendering",
     icon: FileText,
+  },
+  {
+    name: "JavaScript Sandbox",
+    path: "/js-sandbox",
+    description: "Execute JavaScript code in a sandboxed environment",
+    icon: Code2,
   },
 ] as const;
 

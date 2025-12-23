@@ -24,6 +24,7 @@ Free, open-source developer tools. All processing happens in your browser.
 - [**Text Diff Checker**](https://opendevtools.io/text-diff) - Compare two text blocks and see differences
 - [**Lorem Ipsum**](https://opendevtools.io/lorem-ipsum) - Generate placeholder text
 - [**Markdown Preview**](https://opendevtools.io/markdown-preview) - Preview markdown with live rendering
+- [**JavaScript Sandbox**](https://opendevtools.io/js-sandbox) - Execute JavaScript code in a sandboxed environment
 
 ## Tech Stack
 
@@ -86,6 +87,7 @@ OpenDevTools is built on the shoulders of giants. We're grateful to the open sou
 - [js-yaml](https://github.com/nodeca/js-yaml) - YAML parsing
 - [lorem-ipsum](https://github.com/knicklabs/lorem-ipsum.js) - Text generation
 - [diff](https://github.com/kpdecker/jsdiff) - Text diffing
+- [CodeMirror](https://github.com/codemirror/dev) - Code editor component
 
 ### Support Open Source
 
