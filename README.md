@@ -21,7 +21,9 @@ Free, open-source developer tools. All processing happens in your browser.
 - [**CSV to JSON**](https://opendevtools.io/csv-to-json) - Convert CSV data to JSON format
 - [**JSON to CSV**](https://opendevtools.io/json-to-csv) - Convert JSON array to CSV format
 - [**URL Encode/Decode**](https://opendevtools.io/url-encode-decode) - Encode or decode URL strings
+- [**Text Diff Checker**](https://opendevtools.io/text-diff) - Compare two text blocks and see differences
 - [**Lorem Ipsum**](https://opendevtools.io/lorem-ipsum) - Generate placeholder text
+- [**Markdown Preview**](https://opendevtools.io/markdown-preview) - Preview markdown with live rendering
 
 ## Tech Stack
 
