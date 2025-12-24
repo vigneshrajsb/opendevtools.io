@@ -15,9 +15,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OpenDevTools",
+  metadataBase: new URL("https://opendevtools.io"),
+  title: {
+    default: "OpenDevTools - Free Online Developer Tools",
+    template: "%s | OpenDevTools",
+  },
   description:
-    "Free, open-source developer tools. All processing happens in your browser.",
+    "Free, open-source developer tools. JSON, YAML, CSV converters, text diff, and more. All processing happens in your browser - no data sent to servers.",
+  keywords: [
+    "developer tools",
+    "JSON formatter",
+    "YAML converter",
+    "CSV converter",
+    "online tools",
+    "free tools",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "OpenDevTools",
+  },
+  twitter: {
+    card: "summary",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
