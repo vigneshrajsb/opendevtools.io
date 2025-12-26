@@ -1,11 +1,11 @@
 import { test, expect } from "../../fixtures/test-fixtures";
 
-test.describe("Favorites", () => {
+test.describe("Favorites", { tag: ["@sidebar"] }, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/json-to-yaml");
   });
 
-  test("shows empty favorites state initially", async ({ sidebarPage }) => {
+  test("shows empty favorites state initially", { tag: ["@smoke"] }, async ({ sidebarPage }) => {
     await expect(sidebarPage.noFavoritesText).toBeVisible();
   });
 

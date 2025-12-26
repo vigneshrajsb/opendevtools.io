@@ -1,7 +1,7 @@
 import { test, expect } from "../../fixtures/test-fixtures";
 import { testData } from "../../fixtures/test-data";
 
-test.describe("YAML to JSON", () => {
+test.describe("YAML to JSON", { tag: ["@tools"] }, () => {
   test.beforeEach(async ({ toolPage }) => {
     await toolPage.goto("/yaml-to-json");
   });

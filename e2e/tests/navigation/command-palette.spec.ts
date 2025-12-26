@@ -1,11 +1,11 @@
 import { test, expect } from "../../fixtures/test-fixtures";
 
-test.describe("Command Palette", () => {
+test.describe("Command Palette", { tag: ["@navbar"] }, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/json-to-yaml");
   });
 
-  test("opens with search button click", async ({ navbarPage }) => {
+  test("opens with search button click", { tag: ["@smoke"] }, async ({ navbarPage }) => {
     await navbarPage.openCommandPalette();
     await expect(navbarPage.commandDialog).toBeVisible();
   });

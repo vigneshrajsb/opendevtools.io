@@ -1,11 +1,11 @@
 import { test, expect } from "../../fixtures/test-fixtures";
 
-test.describe("Navbar", () => {
+test.describe("Navbar", { tag: ["@navbar"] }, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/json-to-yaml");
   });
 
-  test("toolbox link navigates to toolbox page", async ({ navbarPage, page }) => {
+  test("toolbox link navigates to toolbox page", { tag: ["@smoke"] }, async ({ navbarPage, page }) => {
     await navbarPage.clickToolbox();
     await expect(page).toHaveURL("/toolbox");
   });

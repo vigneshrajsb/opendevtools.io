@@ -1,12 +1,12 @@
 import { test, expect } from "../../fixtures/test-fixtures";
 import { testData } from "../../fixtures/test-data";
 
-test.describe("JSON to YAML", () => {
+test.describe("JSON to YAML", { tag: ["@tools"] }, () => {
   test.beforeEach(async ({ toolPage }) => {
     await toolPage.goto("/json-to-yaml");
   });
 
-  test("page loads correctly and example/clear work", async ({ toolPage }) => {
+  test("page loads correctly and example/clear work", { tag: ["@smoke"] }, async ({ toolPage }) => {
     // Initial state
     await expect(toolPage.pageTitle).toHaveText("JSON to YAML");
     await expect(toolPage.outputTextarea).toHaveValue("");

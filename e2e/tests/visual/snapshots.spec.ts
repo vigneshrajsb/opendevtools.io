@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { tools } from "../../fixtures/test-data";
 
-test.describe("Visual Regression", () => {
-  test("home page", async ({ page }) => {
+test.describe("Visual Regression", { tag: ["@visual"] }, () => {
+  test("home page", { tag: ["@smoke"] }, async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
     await expect(page).toHaveScreenshot("home-page.png", {
@@ -19,7 +19,7 @@ test.describe("Visual Regression", () => {
   });
 
   for (const tool of tools) {
-    test(`${tool.name} - with example loaded`, async ({ page }) => {
+    test(`${tool.name} - with example loaded`, { tag: ["@tools"] }, async ({ page }) => {
       await page.goto(tool.path);
       await page.waitForLoadState("networkidle");
 
@@ -35,7 +35,7 @@ test.describe("Visual Regression", () => {
     });
   }
 
-  test("sidebar collapsed state", async ({ page }) => {
+  test("sidebar collapsed state", { tag: ["@sidebar"] }, async ({ page }) => {
     await page.goto("/json-to-yaml");
     await page.waitForLoadState("networkidle");
 

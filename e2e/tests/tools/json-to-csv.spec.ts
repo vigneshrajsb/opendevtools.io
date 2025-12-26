@@ -1,7 +1,7 @@
 import { test, expect } from "../../fixtures/test-fixtures";
 import { testData } from "../../fixtures/test-data";
 
-test.describe("JSON to CSV", () => {
+test.describe("JSON to CSV", { tag: ["@tools"] }, () => {
   test.beforeEach(async ({ toolPage }) => {
     await toolPage.goto("/json-to-csv");
   });

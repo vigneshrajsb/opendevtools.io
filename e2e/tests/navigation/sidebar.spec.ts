@@ -1,12 +1,12 @@
 import { test, expect } from "../../fixtures/test-fixtures";
 import { tools } from "../../fixtures/test-data";
 
-test.describe("Sidebar", () => {
+test.describe("Sidebar", { tag: ["@sidebar"] }, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/json-to-yaml");
   });
 
-  test("all tools are listed in Developer Tools section", async ({
+  test("all tools are listed in Developer Tools section", { tag: ["@smoke"] }, async ({
     sidebarPage,
   }) => {
     const toolNames = await sidebarPage.getAllToolNames();

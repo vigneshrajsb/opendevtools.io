@@ -1,6 +1,6 @@
 import { test, expect } from "../../fixtures/test-fixtures";
 
-test.describe("JavaScript Sandbox", () => {
+test.describe("JavaScript Sandbox", { tag: ["@tools"] }, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/js-sandbox");
   });

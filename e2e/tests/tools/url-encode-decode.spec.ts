@@ -1,7 +1,7 @@
 import { test, expect } from "../../fixtures/test-fixtures";
 import { testData } from "../../fixtures/test-data";
 
-test.describe("URL Encode/Decode", () => {
+test.describe("URL Encode/Decode", { tag: ["@tools"] }, () => {
   test.beforeEach(async ({ toolPage }) => {
     await toolPage.goto("/url-encode-decode");
   });
