@@ -39,34 +39,36 @@ export function CodeEditor({
   }, [wrapCode]);
 
   return (
-    <CodeMirror
-      value={value}
-      onChange={onChange}
-      extensions={extensions}
-      theme={isDark ? oneDark : "light"}
-      placeholder={placeholder}
-      editable={!readOnly}
-      readOnly={readOnly}
-      basicSetup={{
-        lineNumbers: showLineNumbers,
-        highlightActiveLineGutter: showLineNumbers,
-        highlightActiveLine: true,
-        foldGutter: false,
-        dropCursor: true,
-        allowMultipleSelections: true,
-        indentOnInput: true,
-        bracketMatching: true,
-        closeBrackets: true,
-        autocompletion: false,
-        rectangularSelection: true,
-        crosshairCursor: false,
-        highlightSelectionMatches: true,
-      }}
-      className={className}
-      style={{
-        fontSize: "14px",
-        height: "100%",
-      }}
-    />
+    <div data-testid="code-editor" className="h-full">
+      <CodeMirror
+        value={value}
+        onChange={onChange}
+        extensions={extensions}
+        theme={isDark ? oneDark : "light"}
+        placeholder={placeholder}
+        editable={!readOnly}
+        readOnly={readOnly}
+        basicSetup={{
+          lineNumbers: showLineNumbers,
+          highlightActiveLineGutter: showLineNumbers,
+          highlightActiveLine: true,
+          foldGutter: false,
+          dropCursor: true,
+          allowMultipleSelections: true,
+          indentOnInput: true,
+          bracketMatching: true,
+          closeBrackets: true,
+          autocompletion: false,
+          rectangularSelection: true,
+          crosshairCursor: false,
+          highlightSelectionMatches: true,
+        }}
+        className={className}
+        style={{
+          fontSize: "14px",
+          height: "100%",
+        }}
+      />
+    </div>
   );
 }

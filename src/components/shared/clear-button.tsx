@@ -19,6 +19,7 @@ export function ClearButton({ onClick, className, showLabel = true }: ClearButto
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
+          data-testid="btn-clear"
           variant="outline"
           size={showLabel ? "default" : "icon"}
           className={className}

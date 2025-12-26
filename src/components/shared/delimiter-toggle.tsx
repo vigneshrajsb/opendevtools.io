@@ -26,6 +26,7 @@ export function DelimiterToggle({ value, onValueChange, className }: DelimiterTo
 
   return (
     <ToggleGroup
+      data-testid="delimiter-toggle"
       type="single"
       variant="outline"
       value={value}
@@ -35,6 +36,7 @@ export function DelimiterToggle({ value, onValueChange, className }: DelimiterTo
       <Tooltip>
         <TooltipTrigger asChild>
           <ToggleGroupItem
+            data-testid="delimiter-comma"
             value=","
             aria-label="Comma separator"
             className={selectedItemClass}
@@ -48,6 +50,7 @@ export function DelimiterToggle({ value, onValueChange, className }: DelimiterTo
       <Tooltip>
         <TooltipTrigger asChild>
           <ToggleGroupItem
+            data-testid="delimiter-semicolon"
             value=";"
             aria-label="Semicolon separator"
             className={selectedItemClass}
@@ -61,6 +64,7 @@ export function DelimiterToggle({ value, onValueChange, className }: DelimiterTo
       <Tooltip>
         <TooltipTrigger asChild>
           <ToggleGroupItem
+            data-testid="delimiter-pipe"
             value="|"
             aria-label="Pipe separator"
             className={selectedItemClass}
@@ -74,6 +78,7 @@ export function DelimiterToggle({ value, onValueChange, className }: DelimiterTo
       <Tooltip>
         <TooltipTrigger asChild>
           <ToggleGroupItem
+            data-testid="delimiter-tab"
             value={"\t"}
             aria-label="Tab separator"
             className={selectedItemClass}
@@ -87,6 +92,7 @@ export function DelimiterToggle({ value, onValueChange, className }: DelimiterTo
       <Tooltip>
         <TooltipTrigger asChild>
           <ToggleGroupItem
+            data-testid="delimiter-space"
             value=" "
             aria-label="Space separator"
             className={selectedItemClass}
