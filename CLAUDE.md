@@ -100,6 +100,7 @@ This layout ensures predictable UX - users always find Clear on the left and Cop
    - Error handling for invalid input
    - **State persistence using `useToolState` hook** (see below)
 4. All processing must happen client-side
+5. **Add E2E tests** (see Testing section below)
 
 ### State Persistence
 
@@ -151,6 +152,10 @@ When implementing specific tools, these packages are available:
 - `js-yaml` - JSON to YAML conversion
 - `diff` - Text diff comparison
 - Markdown: Use native browser rendering or add minimal library as needed
+
+## Testing
+
+See [docs/tests.md](docs/tests.md) for E2E testing guide, test templates, and Docker setup.
 
 ## Important Notes
 
