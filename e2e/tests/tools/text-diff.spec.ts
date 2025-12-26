@@ -35,8 +35,10 @@ test.describe("Text Diff Checker", () => {
     const originalTextarea = page.getByTestId("tool-input-original");
     const modifiedTextarea = page.getByTestId("tool-input-modified");
 
-    await originalTextarea.fill(testData.diffOriginal);
-    await modifiedTextarea.fill(testData.diffModified);
+    await originalTextarea.clear();
+    await originalTextarea.pressSequentially(testData.diffOriginal, { delay: 5 });
+    await modifiedTextarea.clear();
+    await modifiedTextarea.pressSequentially(testData.diffModified, { delay: 5 });
 
     const diffOutput = page.getByTestId("tool-output");
     await expect(diffOutput).not.toBeEmpty();

@@ -36,7 +36,8 @@ export class ToolPage {
   }
 
   async setInput(text: string) {
-    await this.inputTextarea.fill(text);
+    await this.inputTextarea.clear();
+    await this.inputTextarea.pressSequentially(text, { delay: 5 });
   }
 
   async getInput(): Promise<string> {

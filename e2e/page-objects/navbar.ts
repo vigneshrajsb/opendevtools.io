@@ -38,7 +38,8 @@ export class NavbarPage {
   }
 
   async searchInPalette(query: string) {
-    await this.commandInput.fill(query);
+    await this.commandInput.clear();
+    await this.commandInput.pressSequentially(query, { delay: 5 });
   }
 
   async selectCommandResult(name: string) {
