@@ -7,7 +7,6 @@ import {
   Type,
   FileText,
   Code2,
-  type LucideIcon,
 } from "lucide-react";
 
 export const tools = [

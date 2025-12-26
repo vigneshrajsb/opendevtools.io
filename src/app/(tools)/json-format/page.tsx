@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -22,16 +22,9 @@ export default function JsonFormatPage() {
   const indent = (settings.indent as IndentType) || "2";
   const setIndent = (value: IndentType) => setSetting("indent", value);
 
-  const [output, setOutput] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [isValid, setIsValid] = useState(false);
-
-  useEffect(() => {
+  const { output, error, isValid } = useMemo(() => {
     if (!input.trim()) {
-      setOutput("");
-      setError(null);
-      setIsValid(false);
-      return;
+      return { output: "", error: null, isValid: false };
     }
 
     try {
@@ -46,21 +39,18 @@ export default function JsonFormatPage() {
         formatted = JSON.stringify(parsed, null, Number(indent));
       }
 
-      setOutput(formatted);
-      setError(null);
-      setIsValid(true);
+      return { output: formatted, error: null, isValid: true };
     } catch (e) {
-      setOutput("");
-      setError(e instanceof Error ? e.message : "Invalid JSON");
-      setIsValid(false);
+      return {
+        output: "",
+        error: e instanceof Error ? e.message : "Invalid JSON",
+        isValid: false,
+      };
     }
   }, [input, indent]);
 
   const handleClear = () => {
     clear();
-    setOutput("");
-    setError(null);
-    setIsValid(false);
   };
 
   const handleExample = () => {

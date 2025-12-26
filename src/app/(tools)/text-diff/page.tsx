@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -40,34 +40,27 @@ export default function TextDiffPage() {
   const setModified = (value: string) => setSetting("modified", value);
   const setDiffMode = (value: DiffMode) => setSetting("diffMode", value);
 
-  const [output, setOutput] = useState<string>("");
-  const [diffParts, setDiffParts] = useState<Diff.Change[]>([]);
   const diffOutputRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const { output, diffParts } = useMemo(() => {
     if (!original && !modified) {
-      setOutput("");
-      setDiffParts([]);
-      return;
+      return { output: "", diffParts: [] as Diff.Change[] };
     }
 
     switch (diffMode) {
       case "patch":
-        setOutput(Diff.createPatch("file", original, modified, "", ""));
-        setDiffParts([]);
-        break;
+        return {
+          output: Diff.createPatch("file", original, modified, "", ""),
+          diffParts: [] as Diff.Change[],
+        };
       case "lines":
-        setDiffParts(Diff.diffLines(original, modified));
-        setOutput("");
-        break;
+        return { output: "", diffParts: Diff.diffLines(original, modified) };
       case "words":
-        setDiffParts(Diff.diffWords(original, modified));
-        setOutput("");
-        break;
+        return { output: "", diffParts: Diff.diffWords(original, modified) };
       case "chars":
-        setDiffParts(Diff.diffChars(original, modified));
-        setOutput("");
-        break;
+        return { output: "", diffParts: Diff.diffChars(original, modified) };
+      default:
+        return { output: "", diffParts: [] as Diff.Change[] };
     }
   }, [original, modified, diffMode]);
 
@@ -80,8 +73,6 @@ export default function TextDiffPage() {
 
   const handleClear = () => {
     clear();
-    setOutput("");
-    setDiffParts([]);
   };
 
   const handleExample = () => {

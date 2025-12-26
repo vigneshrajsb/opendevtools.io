@@ -64,7 +64,8 @@ export const useToolPreferences = create<ToolPreferencesState>()(
         })),
       clearToolState: (path) =>
         set((state) => {
-          const { [path]: _, ...rest } = state.toolStates;
+          const { [path]: _removed, ...rest } = state.toolStates;
+          void _removed;
           return { toolStates: rest };
         }),
       resetFavorites: () => set({ favorites: [] }),

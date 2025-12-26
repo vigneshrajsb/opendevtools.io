@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import * as jsYaml from "js-yaml";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,14 +38,9 @@ export default function YamlToJsonPage() {
   const indent = (settings.indent as IndentType) || "2";
   const setIndent = (value: IndentType) => setSetting("indent", value);
 
-  const [output, setOutput] = useState("");
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
+  const { output, error } = useMemo(() => {
     if (!input.trim()) {
-      setOutput("");
-      setError(null);
-      return;
+      return { output: "", error: null };
     }
 
     try {
@@ -60,18 +55,17 @@ export default function YamlToJsonPage() {
         formatted = JSON.stringify(parsed, null, Number(indent));
       }
 
-      setOutput(formatted);
-      setError(null);
+      return { output: formatted, error: null };
     } catch (e) {
-      setOutput("");
-      setError(e instanceof Error ? e.message : "Invalid YAML");
+      return {
+        output: "",
+        error: e instanceof Error ? e.message : "Invalid YAML",
+      };
     }
   }, [input, indent]);
 
   const handleClear = () => {
     clear();
-    setOutput("");
-    setError(null);
   };
 
   const handleExample = () => {

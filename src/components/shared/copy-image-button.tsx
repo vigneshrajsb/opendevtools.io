@@ -127,6 +127,8 @@ export function CopyImageButton({
       case "capturing":
         return (
           <Image
+            aria-hidden="true"
+            alt=""
             className={
               showLabel ? "h-4 w-4 mr-2 animate-pulse" : "h-4 w-4 animate-pulse"
             }
@@ -153,7 +155,13 @@ export function CopyImageButton({
           />
         );
       default:
-        return <Image className={showLabel ? "h-4 w-4 mr-2" : "h-4 w-4"} />;
+        return (
+          <Image
+            aria-hidden="true"
+            alt=""
+            className={showLabel ? "h-4 w-4 mr-2" : "h-4 w-4"}
+          />
+        );
     }
   };
 

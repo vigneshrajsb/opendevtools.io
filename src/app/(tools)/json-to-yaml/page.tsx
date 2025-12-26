@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import * as jsYaml from "js-yaml";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -40,31 +40,26 @@ const EXAMPLE_JSON = `{
 
 export default function JsonToYamlPage() {
   const { input, setInput, clear } = useToolState("/json-to-yaml");
-  const [output, setOutput] = useState("");
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const { output, error } = useMemo(() => {
     if (!input.trim()) {
-      setOutput("");
-      setError(null);
-      return;
+      return { output: "", error: null };
     }
 
     try {
       const parsed = JSON.parse(input);
       const yaml = jsYaml.dump(parsed, { indent: 2 });
-      setOutput(yaml);
-      setError(null);
+      return { output: yaml, error: null };
     } catch (e) {
-      setOutput("");
-      setError(e instanceof Error ? e.message : "Invalid JSON");
+      return {
+        output: "",
+        error: e instanceof Error ? e.message : "Invalid JSON",
+      };
     }
   }, [input]);
 
   const handleClear = () => {
     clear();
-    setOutput("");
-    setError(null);
   };
 
   const handleExample = () => {

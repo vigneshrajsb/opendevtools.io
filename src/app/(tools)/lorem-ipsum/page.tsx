@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { LoremIpsum } from "lorem-ipsum";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,8 +25,6 @@ export default function LoremIpsumPage() {
   const count = (settings.count as CountMultiplier) || "1";
   const setCount = (value: CountMultiplier) => setSetting("count", value);
 
-  const [output, setOutput] = useState("");
-
   const lorem = useMemo(
     () =>
       new LoremIpsum({
@@ -36,34 +34,37 @@ export default function LoremIpsumPage() {
     []
   );
 
-  const generate = (type: TextType, cnt: CountMultiplier) => {
-    const n = Number(cnt);
-    const results: string[] = [];
-    for (let i = 0; i < n; i++) {
-      switch (type) {
-        case "paragraph":
-          results.push(lorem.generateParagraphs(1));
-          break;
-        case "sentence":
-          results.push(lorem.generateSentences(1));
-          break;
-        case "word":
-          results.push(lorem.generateWords(1));
-          break;
+  const generate = useCallback(
+    (type: TextType, cnt: CountMultiplier) => {
+      const n = Number(cnt);
+      const results: string[] = [];
+      for (let i = 0; i < n; i++) {
+        switch (type) {
+          case "paragraph":
+            results.push(lorem.generateParagraphs(1));
+            break;
+          case "sentence":
+            results.push(lorem.generateSentences(1));
+            break;
+          case "word":
+            results.push(lorem.generateWords(1));
+            break;
+        }
       }
-    }
-    return results.join("\n");
-  };
+      return results.join("\n");
+    },
+    [lorem]
+  );
 
-  useEffect(() => {
+  const output = useMemo(() => {
     if (textType) {
-      setOutput(generate(textType, count));
+      return generate(textType, count);
     }
-  }, [textType, count]);
+    return "";
+  }, [textType, count, generate]);
 
   const handleClear = () => {
     clear();
-    setOutput("");
   };
 
   const handleTypeChange = (value: string) => {
@@ -194,9 +195,9 @@ export default function LoremIpsumPage() {
       <Textarea
         data-testid="tool-output"
         value={output}
-        onChange={(e) => setOutput(e.target.value)}
+        readOnly
         placeholder="Select a type above to generate lorem ipsum text..."
-        className="h-0 flex-1 resize-none font-mono text-sm overflow-auto"
+        className="h-0 flex-1 resize-none font-mono text-sm overflow-auto bg-muted/50"
         aria-label="Generated lorem ipsum text"
       />
     </div>
