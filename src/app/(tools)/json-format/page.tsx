@@ -80,7 +80,7 @@ export default function JsonFormatPage() {
         <div className="flex flex-wrap items-center gap-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="outline" onClick={handleExample}>
+              <Button data-testid="btn-example" variant="outline" onClick={handleExample}>
                 <FileCode className="h-4 w-4 mr-2" />
                 Example
               </Button>
@@ -105,6 +105,7 @@ export default function JsonFormatPage() {
             )}
           </div>
           <Textarea
+            data-testid="tool-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste your JSON here..."
@@ -117,6 +118,7 @@ export default function JsonFormatPage() {
         <div className="flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">Formatted Output</label>
           <Textarea
+            data-testid="tool-output"
             value={error ? `Error: ${error}` : output}
             readOnly
             placeholder="Formatted JSON will appear here..."

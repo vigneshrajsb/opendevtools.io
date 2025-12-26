@@ -192,6 +192,7 @@ export default function LoremIpsumPage() {
       </TooltipProvider>
 
       <Textarea
+        data-testid="tool-output"
         value={output}
         onChange={(e) => setOutput(e.target.value)}
         placeholder="Select a type above to generate lorem ipsum text..."

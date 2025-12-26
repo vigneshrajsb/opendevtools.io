@@ -48,13 +48,19 @@ function ToolMenuItem({
 }) {
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={isActive} tooltip={tool.name}>
+      <SidebarMenuButton
+        data-testid={`sidebar-tool-${tool.path.slice(1)}`}
+        asChild
+        isActive={isActive}
+        tooltip={tool.name}
+      >
         <Link href={tool.path}>
           <tool.icon />
           <span>{tool.name}</span>
         </Link>
       </SidebarMenuButton>
       <SidebarMenuAction
+        data-testid={`sidebar-favorite-${tool.path.slice(1)}`}
         onClick={(e) => {
           e.preventDefault();
           onToggleFavorite();
@@ -94,7 +100,12 @@ function SortableFavoriteItem({
 
   return (
     <SidebarMenuItem ref={setNodeRef} style={style} className="group/favorite">
-      <SidebarMenuButton asChild isActive={isActive} tooltip={tool.name}>
+      <SidebarMenuButton
+        data-testid={`sidebar-tool-${tool.path.slice(1)}`}
+        asChild
+        isActive={isActive}
+        tooltip={tool.name}
+      >
         <Link href={tool.path}>
           <tool.icon />
           <span>{tool.name}</span>
@@ -110,6 +121,7 @@ function SortableFavoriteItem({
           <GripVertical className="h-4 w-4 text-muted-foreground" />
         </button>
         <button
+          data-testid={`sidebar-favorite-${tool.path.slice(1)}`}
           onClick={(e) => {
             e.preventDefault();
             onToggleFavorite();
@@ -168,6 +180,7 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
+              data-testid="sidebar-collapse"
               onClick={toggleSidebar}
               tooltip={open ? "Collapse Sidebar" : "Expand Sidebar"}
             >
@@ -188,7 +201,7 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContent className="py-2">
-        <SidebarGroup>
+        <SidebarGroup data-testid="sidebar-favorites">
           <SidebarGroupLabel>Favorites</SidebarGroupLabel>
           <SidebarGroupContent>
             {favoriteTools.length > 0 ? (
@@ -214,13 +227,16 @@ export function AppSidebar() {
                 </SortableContext>
               </DndContext>
             ) : (
-              <p className="px-2 py-1.5 text-sm text-muted-foreground">
+              <p
+                data-testid="sidebar-no-favorites"
+                className="px-2 py-1.5 text-sm text-muted-foreground"
+              >
                 No favorites yet.
               </p>
             )}
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup>
+        <SidebarGroup data-testid="sidebar-tools">
           <SidebarGroupLabel>Developer Tools</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>

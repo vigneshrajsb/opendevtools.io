@@ -236,7 +236,7 @@ export default function JsSandboxPage() {
         <div className="flex flex-wrap items-center gap-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="outline" onClick={handleExample}>
+              <Button data-testid="btn-example" variant="outline" onClick={handleExample}>
                 <FileCode className="h-4 w-4 mr-2" />
                 Example
               </Button>
@@ -312,6 +312,7 @@ export default function JsSandboxPage() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
+                  data-testid="btn-run"
                   variant="outline"
                   size="icon"
                   onClick={executeCode}
@@ -327,6 +328,7 @@ export default function JsSandboxPage() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
+                  data-testid="btn-stop"
                   variant="outline"
                   size="icon"
                   onClick={stopExecution}
@@ -347,7 +349,7 @@ export default function JsSandboxPage() {
       <div className="grid grid-cols-2 gap-4 flex-1 min-h-0">
         <div className="flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">JavaScript Code</label>
-          <div className="h-0 flex-1 overflow-hidden rounded-md border">
+          <div data-testid="tool-input" className="h-0 flex-1 overflow-hidden rounded-md border">
             <CodeEditor
               value={input}
               onChange={setInput}
@@ -370,7 +372,7 @@ export default function JsSandboxPage() {
           {!output && (isRunning || (input.trim() && !hasRun)) ? (
             <Skeleton className="h-0 flex-1 rounded-md" />
           ) : (
-            <div className="h-0 flex-1 overflow-hidden rounded-md border">
+            <div data-testid="tool-output" className="h-0 flex-1 overflow-hidden rounded-md border">
               <CodeEditor
                 value={output}
                 readOnly

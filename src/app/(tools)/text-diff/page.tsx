@@ -109,7 +109,7 @@ export default function TextDiffPage() {
         <div className="flex flex-wrap items-center gap-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="outline" onClick={handleExample}>
+              <Button data-testid="btn-example" variant="outline" onClick={handleExample}>
                 <FileCode className="h-4 w-4 mr-2" />
                 Example
               </Button>
@@ -191,6 +191,7 @@ export default function TextDiffPage() {
           <div className="flex flex-col gap-2 h-0 flex-1 min-h-0">
             <label className="text-sm font-medium">Original</label>
             <Textarea
+              data-testid="tool-input-original"
               value={original}
               onChange={(e) => setOriginal(e.target.value)}
               placeholder="Paste original text here..."
@@ -200,6 +201,7 @@ export default function TextDiffPage() {
           <div className="flex flex-col gap-2 h-0 flex-1 min-h-0">
             <label className="text-sm font-medium">Modified</label>
             <Textarea
+              data-testid="tool-input-modified"
               value={modified}
               onChange={(e) => setModified(e.target.value)}
               placeholder="Paste modified text here..."
@@ -211,6 +213,7 @@ export default function TextDiffPage() {
         <div className="col-span-2 flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">Diff</label>
           <div
+            data-testid="tool-output"
             ref={diffOutputRef}
             className="relative h-0 flex-1 min-h-0 overflow-auto rounded-md border bg-muted/50 p-4"
           >

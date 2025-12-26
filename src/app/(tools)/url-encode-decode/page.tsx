@@ -80,7 +80,7 @@ export default function UrlEncodeDecodePage() {
         <div className="flex flex-wrap items-center gap-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="outline" onClick={handleExample}>
+              <Button data-testid="btn-example" variant="outline" onClick={handleExample}>
                 <FileCode className="h-4 w-4 mr-2" />
                 Example
               </Button>
@@ -135,6 +135,7 @@ export default function UrlEncodeDecodePage() {
             {mode === "encode" ? "Text to Encode" : "URL to Decode"}
           </label>
           <Textarea
+            data-testid="tool-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={
@@ -153,6 +154,7 @@ export default function UrlEncodeDecodePage() {
             {mode === "encode" ? "Encoded Output" : "Decoded Output"}
           </label>
           <Textarea
+            data-testid="tool-output"
             value={error ? `Error: ${error}` : output}
             readOnly
             placeholder={
