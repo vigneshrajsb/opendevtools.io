@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -40,34 +40,27 @@ export default function TextDiffPage() {
   const setModified = (value: string) => setSetting("modified", value);
   const setDiffMode = (value: DiffMode) => setSetting("diffMode", value);
 
-  const [output, setOutput] = useState<string>("");
-  const [diffParts, setDiffParts] = useState<Diff.Change[]>([]);
   const diffOutputRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const { output, diffParts } = useMemo(() => {
     if (!original && !modified) {
-      setOutput("");
-      setDiffParts([]);
-      return;
+      return { output: "", diffParts: [] as Diff.Change[] };
     }
 
     switch (diffMode) {
       case "patch":
-        setOutput(Diff.createPatch("file", original, modified, "", ""));
-        setDiffParts([]);
-        break;
+        return {
+          output: Diff.createPatch("file", original, modified, "", ""),
+          diffParts: [] as Diff.Change[],
+        };
       case "lines":
-        setDiffParts(Diff.diffLines(original, modified));
-        setOutput("");
-        break;
+        return { output: "", diffParts: Diff.diffLines(original, modified) };
       case "words":
-        setDiffParts(Diff.diffWords(original, modified));
-        setOutput("");
-        break;
+        return { output: "", diffParts: Diff.diffWords(original, modified) };
       case "chars":
-        setDiffParts(Diff.diffChars(original, modified));
-        setOutput("");
-        break;
+        return { output: "", diffParts: Diff.diffChars(original, modified) };
+      default:
+        return { output: "", diffParts: [] as Diff.Change[] };
     }
   }, [original, modified, diffMode]);
 
@@ -80,8 +73,6 @@ export default function TextDiffPage() {
 
   const handleClear = () => {
     clear();
-    setOutput("");
-    setDiffParts([]);
   };
 
   const handleExample = () => {
@@ -109,7 +100,7 @@ export default function TextDiffPage() {
         <div className="flex flex-wrap items-center gap-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="outline" onClick={handleExample}>
+              <Button data-testid="btn-example" variant="outline" onClick={handleExample}>
                 <FileCode className="h-4 w-4 mr-2" />
                 Example
               </Button>
@@ -191,6 +182,7 @@ export default function TextDiffPage() {
           <div className="flex flex-col gap-2 h-0 flex-1 min-h-0">
             <label className="text-sm font-medium">Original</label>
             <Textarea
+              data-testid="tool-input-original"
               value={original}
               onChange={(e) => setOriginal(e.target.value)}
               placeholder="Paste original text here..."
@@ -200,6 +192,7 @@ export default function TextDiffPage() {
           <div className="flex flex-col gap-2 h-0 flex-1 min-h-0">
             <label className="text-sm font-medium">Modified</label>
             <Textarea
+              data-testid="tool-input-modified"
               value={modified}
               onChange={(e) => setModified(e.target.value)}
               placeholder="Paste modified text here..."
@@ -211,6 +204,7 @@ export default function TextDiffPage() {
         <div className="col-span-2 flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">Diff</label>
           <div
+            data-testid="tool-output"
             ref={diffOutputRef}
             className="relative h-0 flex-1 min-h-0 overflow-auto rounded-md border bg-muted/50 p-4"
           >

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -75,31 +75,25 @@ export default function JsonToCsvPage() {
   const delimiter = (settings.delimiter as Delimiter) || ",";
   const setDelimiter = (value: Delimiter) => setSetting("delimiter", value);
 
-  const [output, setOutput] = useState("");
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
+  const { output, error } = useMemo(() => {
     if (!input.trim()) {
-      setOutput("");
-      setError(null);
-      return;
+      return { output: "", error: null };
     }
 
     try {
       const parsed = JSON.parse(input);
       const csv = jsonToCSV(parsed, delimiter);
-      setOutput(csv);
-      setError(null);
+      return { output: csv, error: null };
     } catch (e) {
-      setOutput("");
-      setError(e instanceof Error ? e.message : "Invalid JSON");
+      return {
+        output: "",
+        error: e instanceof Error ? e.message : "Invalid JSON",
+      };
     }
   }, [input, delimiter]);
 
   const handleClear = () => {
     clear();
-    setOutput("");
-    setError(null);
   };
 
   const handleExample = () => {
@@ -119,7 +113,7 @@ export default function JsonToCsvPage() {
         <div className="flex flex-wrap items-center gap-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="outline" onClick={handleExample}>
+              <Button data-testid="btn-example" variant="outline" onClick={handleExample}>
                 <FileCode className="h-4 w-4 mr-2" />
                 Example
               </Button>
@@ -136,6 +130,7 @@ export default function JsonToCsvPage() {
         <div className="flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">JSON Input</label>
           <Textarea
+            data-testid="tool-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste your JSON array here..."
@@ -148,6 +143,7 @@ export default function JsonToCsvPage() {
         <div className="flex flex-col gap-2 min-h-0">
           <label className="text-sm font-medium">CSV Output</label>
           <Textarea
+            data-testid="tool-output"
             value={error ? `Error: ${error}` : output}
             readOnly
             placeholder="CSV output will appear here..."

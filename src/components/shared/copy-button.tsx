@@ -28,6 +28,7 @@ export function CopyButton({ text, className, showLabel = false }: CopyButtonPro
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
+          data-testid="btn-copy"
           variant="outline"
           size={showLabel ? "default" : "icon"}
           className={className}

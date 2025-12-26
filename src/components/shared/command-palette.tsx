@@ -76,12 +76,13 @@ export function CommandPaletteProvider({
     <CommandPaletteContext.Provider value={{ open, setOpen }}>
       {children}
       <CommandDialog
+        data-testid="command-dialog"
         open={open}
         onOpenChange={setOpen}
         title="Search Tools"
         description="Search and navigate to a developer tool"
       >
-        <CommandInput placeholder="Search tools..." />
+        <CommandInput data-testid="command-input" placeholder="Search tools..." />
         <CommandList>
           <CommandEmpty>No tools found.</CommandEmpty>
           <CommandGroup heading="Developer Tools">
@@ -139,6 +140,7 @@ export function CommandTrigger() {
 
   return (
     <Button
+      data-testid="nav-search"
       variant="outline"
       className="h-9 w-9 md:h-9 md:w-auto md:px-3 md:gap-2"
       onClick={() => setOpen(true)}

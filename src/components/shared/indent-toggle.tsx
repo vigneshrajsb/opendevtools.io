@@ -26,6 +26,7 @@ export function IndentToggle({ value, onValueChange, className }: IndentTogglePr
 
   return (
     <ToggleGroup
+      data-testid="indent-toggle"
       type="single"
       variant="outline"
       value={value}
@@ -35,6 +36,7 @@ export function IndentToggle({ value, onValueChange, className }: IndentTogglePr
       <Tooltip>
         <TooltipTrigger asChild>
           <ToggleGroupItem
+            data-testid="indent-2"
             value="2"
             aria-label="2 spaces"
             className={selectedItemClass}
@@ -48,6 +50,7 @@ export function IndentToggle({ value, onValueChange, className }: IndentTogglePr
       <Tooltip>
         <TooltipTrigger asChild>
           <ToggleGroupItem
+            data-testid="indent-4"
             value="4"
             aria-label="4 spaces"
             className={selectedItemClass}
@@ -61,6 +64,7 @@ export function IndentToggle({ value, onValueChange, className }: IndentTogglePr
       <Tooltip>
         <TooltipTrigger asChild>
           <ToggleGroupItem
+            data-testid="indent-tab"
             value="tab"
             aria-label="Tab"
             className={selectedItemClass}
@@ -74,6 +78,7 @@ export function IndentToggle({ value, onValueChange, className }: IndentTogglePr
       <Tooltip>
         <TooltipTrigger asChild>
           <ToggleGroupItem
+            data-testid="indent-minify"
             value="minify"
             aria-label="Minify"
             className={selectedItemClass}

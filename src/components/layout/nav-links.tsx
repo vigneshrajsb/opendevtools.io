@@ -11,6 +11,7 @@ export function NavLinks() {
     <div className="ml-auto flex items-center gap-3">
       <CommandTrigger />
       <Button
+        data-testid="nav-toolbox"
         variant="outline"
         size="icon"
         className="md:w-auto md:px-3"
@@ -22,6 +23,7 @@ export function NavLinks() {
         </Link>
       </Button>
       <Button
+        data-testid="nav-github"
         variant="outline"
         size="icon"
         className="md:w-auto md:px-3"

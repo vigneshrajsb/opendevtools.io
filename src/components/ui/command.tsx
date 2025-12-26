@@ -35,12 +35,14 @@ function CommandDialog({
   children,
   className,
   showCloseButton = true,
+  "data-testid": dataTestId,
   ...props
 }: React.ComponentProps<typeof Dialog> & {
   title?: string
   description?: string
   className?: string
   showCloseButton?: boolean
+  "data-testid"?: string
 }) {
   return (
     <Dialog {...props}>
@@ -49,6 +51,7 @@ function CommandDialog({
         <DialogDescription>{description}</DialogDescription>
       </DialogHeader>
       <DialogContent
+        data-testid={dataTestId}
         className={cn("overflow-hidden p-0", className)}
         showCloseButton={showCloseButton}
       >
