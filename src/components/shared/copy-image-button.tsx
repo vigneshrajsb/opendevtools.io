@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Image, Download } from "lucide-react";
+import { Check, Image as ImageIcon, Download } from "lucide-react";
 import { toBlob } from "html-to-image";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -126,9 +126,8 @@ export function CopyImageButton({
     switch (status) {
       case "capturing":
         return (
-          <Image
+          <ImageIcon
             aria-hidden="true"
-            alt=""
             className={
               showLabel ? "h-4 w-4 mr-2 animate-pulse" : "h-4 w-4 animate-pulse"
             }
@@ -156,9 +155,8 @@ export function CopyImageButton({
         );
       default:
         return (
-          <Image
+          <ImageIcon
             aria-hidden="true"
-            alt=""
             className={showLabel ? "h-4 w-4 mr-2" : "h-4 w-4"}
           />
         );
