@@ -9,6 +9,7 @@ export const tools = [
   { name: "Lorem Ipsum Generator", path: "/lorem-ipsum" },
   { name: "Markdown Preview", path: "/markdown-preview" },
   { name: "JavaScript Sandbox", path: "/js-sandbox" },
+  { name: "Escape/Unescape Newlines", path: "/escape-newlines" },
 ] as const;
 
 export const testData = {
@@ -63,4 +64,10 @@ Line 3`,
 Line 2 Modified
 Line 3
 Line 4`,
+
+  textToEscape: `Hello World!
+This is a multi-line string.
+It has three distinct lines.`,
+
+  escapedText: `Hello World!\\nThis is a multi-line string.\\nIt has three distinct lines.`,
 };

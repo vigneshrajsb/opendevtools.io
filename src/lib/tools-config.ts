@@ -7,6 +7,7 @@ import {
   Type,
   FileText,
   Code2,
+  WrapText,
 } from "lucide-react";
 
 export const tools = [
@@ -69,6 +70,12 @@ export const tools = [
     path: "/js-sandbox",
     description: "Execute JavaScript code in a sandboxed environment",
     icon: Code2,
+  },
+  {
+    name: "Escape/Unescape Newlines",
+    path: "/escape-newlines",
+    description: "Escape or unescape newline characters in text",
+    icon: WrapText,
   },
 ] as const;
 
