@@ -31,13 +31,14 @@ export default defineConfig({
     },
   ],
 
-  webServer: process.env.CI
-    ? {
+  webServer: process.env.BASE_URL
+    ? undefined // Skip webServer when BASE_URL is set (external server)
+    : {
         command: "pnpm dev",
         url: "http://localhost:3000",
         timeout: 120 * 1000,
-      }
-    : undefined,
+        reuseExistingServer: true,
+      },
 
   expect: {
     toHaveScreenshot: {

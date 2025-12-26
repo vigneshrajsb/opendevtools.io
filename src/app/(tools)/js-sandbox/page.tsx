@@ -181,7 +181,10 @@ export default function JsSandboxPage() {
     const worker = createWorker();
     workerRef.current = worker;
 
-    const id = crypto.randomUUID();
+    // Use fallback for non-secure contexts (e.g., Docker with host.docker.internal)
+    const id =
+      crypto.randomUUID?.() ??
+      `${Date.now()}-${Math.random().toString(36).slice(2)}`;
     executionIdRef.current = id;
 
     worker.postMessage({ type: "execute", code: input, id });

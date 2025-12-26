@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+playwright-report
+test-results
+*.md
+.DS_Store
+.env*
+.tilt-dev
