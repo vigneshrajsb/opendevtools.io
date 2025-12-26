@@ -102,7 +102,7 @@ export default function JsSandboxPage() {
   const { input, setInput, settings, setSetting } =
     useToolState("/js-sandbox");
 
-  const autoRun = settings.autoRun === "true";
+  const autoRun = settings.autoRun !== "false";
   const setAutoRun = (value: boolean) =>
     setSetting("autoRun", value ? "true" : "false");
 
@@ -110,7 +110,7 @@ export default function JsSandboxPage() {
   const setShowLineNumbers = (value: boolean) =>
     setSetting("showLineNumbers", value ? "true" : "false");
 
-  const wrapCode = settings.wrapCode === "true";
+  const wrapCode = settings.wrapCode !== "false";
   const setWrapCode = (value: boolean) =>
     setSetting("wrapCode", value ? "true" : "false");
 
