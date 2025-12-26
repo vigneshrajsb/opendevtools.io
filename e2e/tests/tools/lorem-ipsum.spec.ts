@@ -1,6 +1,6 @@
 import { test, expect } from "../../fixtures/test-fixtures";
 
-test.describe("Lorem Ipsum Generator", () => {
+test.describe("Lorem Ipsum Generator", { tag: ["@tools"] }, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/lorem-ipsum");
   });
