@@ -10,6 +10,7 @@ export const tools = [
   { name: "Markdown Preview", path: "/markdown-preview" },
   { name: "JavaScript Sandbox", path: "/js-sandbox" },
   { name: "Escape/Unescape Newlines", path: "/escape-newlines" },
+  { name: "Base64 Encode/Decode", path: "/base64-encode-decode" },
 ] as const;
 
 export const testData = {
@@ -70,4 +71,7 @@ This is a multi-line string.
 It has three distinct lines.`,
 
   escapedText: `Hello World!\\nThis is a multi-line string.\\nIt has three distinct lines.`,
+
+  base64TextToEncode: "Hello World! This is a test.",
+  base64EncodedText: "SGVsbG8gV29ybGQhIFRoaXMgaXMgYSB0ZXN0Lg==",
 };
