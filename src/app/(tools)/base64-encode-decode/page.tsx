@@ -47,10 +47,6 @@ export default function Base64EncodDecodePage() {
     }
   }, [input, mode]);
 
-  const handleClear = () => {
-    clear();
-  };
-
   const handleExample = () => {
     setInput(mode === "encode" ? EXAMPLE_TEXT : EXAMPLE_ENCODED);
   };
@@ -90,7 +86,7 @@ export default function Base64EncodDecodePage() {
               {mode === "encode" ? "Load sample text to encode" : "Load sample Base64 text"}
             </TooltipContent>
           </Tooltip>
-          <ClearButton onClick={handleClear} />
+          <ClearButton onClick={clear} />
           <ToggleGroup
             type="single"
             variant="outline"

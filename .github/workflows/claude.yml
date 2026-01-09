@@ -57,6 +57,13 @@ jobs:
           additional_permissions: |
             actions: read
 
+          custom_instructions: |
+            When completing work on an issue:
+            - Always create a pull request using mcp__github__create_pull_request after pushing changes
+            - Do not just push to a branch and provide a manual link
+            - The PR title should follow conventional commits (feat:, fix:, etc.)
+            - The PR body should reference the original issue with "Closes #<issue_number>"
+
           # Allowed tools for Claude to use
           # Development: pnpm dev/build/lint
           # Testing: playwright test with various options

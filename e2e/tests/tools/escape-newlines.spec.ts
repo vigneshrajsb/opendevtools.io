@@ -22,7 +22,7 @@ test.describe("Escape/Unescape Newlines", { tag: ["@tools"] }, () => {
   });
 
   test("escape mode converts newlines to \\n", async ({ toolPage, page }) => {
-    await page.getByRole("radio", { name: "Escape" }).click();
+    await page.getByRole("radio", { name: "Escape", exact: true }).click();
     await toolPage.setInput(testData.textToEscape);
     const output = await toolPage.getOutput();
     expect(output).toContain("\\n");
@@ -41,7 +41,7 @@ test.describe("Escape/Unescape Newlines", { tag: ["@tools"] }, () => {
     toolPage,
     page,
   }) => {
-    await page.getByRole("radio", { name: "Escape" }).click();
+    await page.getByRole("radio", { name: "Escape", exact: true }).click();
     await toolPage.setInput(testData.textToEscape);
     const escaped = await toolPage.getOutput();
     expect(escaped).toContain("\\n");
@@ -57,7 +57,7 @@ test.describe("Escape/Unescape Newlines", { tag: ["@tools"] }, () => {
     page,
   }) => {
     // Start in escape mode
-    await page.getByRole("radio", { name: "Escape" }).click();
+    await page.getByRole("radio", { name: "Escape", exact: true }).click();
     await toolPage.setInput(testData.textToEscape);
     const escapedOutput = await toolPage.getOutput();
     expect(escapedOutput).toContain("\\n");
