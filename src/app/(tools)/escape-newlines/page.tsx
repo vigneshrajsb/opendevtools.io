@@ -50,10 +50,6 @@ export default function EscapeNewlinesPage() {
     }
   }, [input, mode]);
 
-  const handleClear = () => {
-    clear();
-  };
-
   const handleExample = () => {
     setInput(mode === "escape" ? EXAMPLE_UNESCAPED : EXAMPLE_ESCAPED);
   };
@@ -93,7 +89,7 @@ export default function EscapeNewlinesPage() {
               {mode === "escape" ? "Load sample multi-line text" : "Load sample escaped text"}
             </TooltipContent>
           </Tooltip>
-          <ClearButton onClick={handleClear} />
+          <ClearButton onClick={clear} />
           <ToggleGroup
             type="single"
             variant="outline"

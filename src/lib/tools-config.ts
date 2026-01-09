@@ -9,6 +9,7 @@ import {
   Code2,
   WrapText,
   Binary,
+  KeyRound,
 } from "lucide-react";
 
 export const tools = [
@@ -83,6 +84,12 @@ export const tools = [
     path: "/base64-encode-decode",
     description: "Encode text to Base64 or decode Base64 strings",
     icon: Binary,
+  },
+  {
+    name: "JWT Debugger",
+    path: "/jwt-debugger",
+    description: "Decode and verify JSON Web Tokens",
+    icon: KeyRound,
   },
 ] as const;
 
