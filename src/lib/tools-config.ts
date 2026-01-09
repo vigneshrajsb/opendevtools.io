@@ -8,6 +8,7 @@ import {
   FileText,
   Code2,
   WrapText,
+  Binary,
 } from "lucide-react";
 
 export const tools = [
@@ -76,6 +77,12 @@ export const tools = [
     path: "/escape-newlines",
     description: "Escape or unescape newline characters in text",
     icon: WrapText,
+  },
+  {
+    name: "Base64 Encode/Decode",
+    path: "/base64-encode-decode",
+    description: "Encode text to Base64 or decode Base64 strings",
+    icon: Binary,
   },
 ] as const;
 
