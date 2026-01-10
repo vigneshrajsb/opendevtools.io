@@ -53,9 +53,9 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium webkit
 
-      - name: Run E2E tests (smoke)
+      - name: Run E2E tests (smoke, excluding visual)
         if: github.event_name == 'pull_request'
-        run: pnpm test:e2e --grep @smoke
+        run: pnpm test:e2e --grep @smoke --grep-invert @visual
 
       - name: Run E2E tests (full)
         if: github.event_name == 'push'
