@@ -343,8 +343,8 @@ export default function JwtDebuggerPage() {
           </Select>
 
           <div className="flex items-center gap-2 ml-auto">
-            <CopyButton text={headerJson} showLabel />
-            <CopyButton text={payloadJson} showLabel />
+            <CopyButton text={headerJson} showLabel label="Copy Headers" />
+            <CopyButton text={payloadJson} showLabel label="Copy Payload" />
           </div>
         </div>
       </TooltipProvider>
