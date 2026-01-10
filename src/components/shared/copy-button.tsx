@@ -13,9 +13,10 @@ interface CopyButtonProps {
   text: string;
   className?: string;
   showLabel?: boolean;
+  label?: string;
 }
 
-export function CopyButton({ text, className, showLabel = false }: CopyButtonProps) {
+export function CopyButton({ text, className, showLabel = false, label = "Copy" }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -40,7 +41,7 @@ export function CopyButton({ text, className, showLabel = false }: CopyButtonPro
           ) : (
             <Copy className={showLabel ? "h-4 w-4 mr-2" : "h-4 w-4"} />
           )}
-          {showLabel ? (copied ? "Copied" : "Copy") : <span className="sr-only">Copy to clipboard</span>}
+          {showLabel ? (copied ? "Copied" : label) : <span className="sr-only">Copy to clipboard</span>}
         </Button>
       </TooltipTrigger>
       <TooltipContent>{copied ? "Copied!" : "Copy to clipboard"}</TooltipContent>
