@@ -12,6 +12,7 @@ export const tools = [
   { name: "Escape/Unescape Newlines", path: "/escape-newlines" },
   { name: "Base64 Encode/Decode", path: "/base64-encode-decode" },
   { name: "JWT Debugger", path: "/jwt-debugger" },
+  { name: "Unix Timestamp", path: "/unix-timestamp" },
 ] as const;
 
 export const testData = {
@@ -134,4 +135,10 @@ jwIDAQAB
 
   jwtMalformedBase64:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.INVALID!@#$BASE64.signature",
+
+  unixTimestamp: "1704067200",
+  unixTimestampMs: "1704067200000",
+  unixTimestampDate: "2024-01-01",
+  unixTimestampISO: "2024-01-01T00:00:00.000Z",
+  invalidTimestamp: "not-a-timestamp",
 };
