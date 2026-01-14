@@ -91,7 +91,28 @@ export default function UnixTimestampPage() {
   };
 
   const handleUnitChange = (value: string) => {
-    if (value) setUnit(value as Unit);
+    if (!value) return;
+
+    const newUnit = value as Unit;
+
+    // Convert input if it's a numeric timestamp
+    if (input) {
+      const trimmed = input.trim();
+      const num = Number(trimmed);
+
+      // Only convert if input is a pure number (timestamp)
+      if (!isNaN(num) && trimmed !== "" && /^\d+$/.test(trimmed)) {
+        if (unit === "seconds" && newUnit === "milliseconds") {
+          // seconds → milliseconds: multiply by 1000
+          setInput(String(num * 1000));
+        } else if (unit === "milliseconds" && newUnit === "seconds") {
+          // milliseconds → seconds: divide by 1000
+          setInput(String(Math.floor(num / 1000)));
+        }
+      }
+    }
+
+    setUnit(newUnit);
   };
 
   const selectedItemClass =
