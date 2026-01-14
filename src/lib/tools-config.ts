@@ -10,6 +10,7 @@ import {
   WrapText,
   Binary,
   KeyRound,
+  Clock,
 } from "lucide-react";
 
 export const tools = [
@@ -90,6 +91,12 @@ export const tools = [
     path: "/jwt-debugger",
     description: "Decode and verify JSON Web Tokens",
     icon: KeyRound,
+  },
+  {
+    name: "Unix Timestamp",
+    path: "/unix-timestamp",
+    description: "Convert between Unix timestamps and dates",
+    icon: Clock,
   },
 ] as const;
 
