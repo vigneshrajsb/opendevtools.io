@@ -175,7 +175,7 @@ export default function UnixTimestampPage() {
         <Clock className="h-4 w-4 text-muted-foreground" />
         <span className="text-sm text-muted-foreground">Current timestamp:</span>
         <code className="text-sm font-mono">{currentTimestamp ?? "..."}</code>
-        <CopyButton text={String(currentTimestamp ?? "")} size="sm" />
+        <CopyButton text={String(currentTimestamp ?? "")} />
       </div>
 
       {/* Input */}
