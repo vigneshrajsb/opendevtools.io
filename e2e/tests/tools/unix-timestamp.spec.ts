@@ -84,18 +84,17 @@ test.describe("Unix Timestamp", { tag: ["@tools"] }, () => {
   });
 
   test("invalid input shows error", async ({ toolPage, page }) => {
-    await toolPage.inputTextarea.fill(testData.invalidTimestamp);
+    // Click to focus, then type the invalid input
+    await toolPage.inputTextarea.click();
+    await toolPage.inputTextarea.pressSequentially(testData.invalidTimestamp);
 
-    // Should show error message
-    await expect(page.getByText("Invalid input")).toBeVisible();
+    // Should show error message (wait for it to appear)
+    await expect(page.getByText("Invalid input")).toBeVisible({ timeout: 10000 });
   });
 
   test("current timestamp display updates", async ({ page }) => {
-    // Get the current timestamp display text
+    // Wait for the timestamp to load (initially shows "...")
     const timestampDisplay = page.locator("code").first();
-    const initialValue = await timestampDisplay.textContent();
-
-    // Wait a bit and check it updated (or is still a valid number)
-    expect(initialValue).toMatch(/^\d+$/);
+    await expect(timestampDisplay).toHaveText(/^\d+$/, { timeout: 5000 });
   });
 });
