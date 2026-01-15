@@ -13,6 +13,7 @@ export const tools = [
   { name: "Base64 Encode/Decode", path: "/base64-encode-decode" },
   { name: "JWT Debugger", path: "/jwt-debugger" },
   { name: "Unix Timestamp", path: "/unix-timestamp" },
+  { name: "SVG to PNG", path: "/svg-to-png" },
 ] as const;
 
 export const testData = {
@@ -141,4 +142,12 @@ jwIDAQAB
   unixTimestampDate: "2024-01-01",
   unixTimestampISO: "2024-01-01T00:00:00.000Z",
   invalidTimestamp: "not-a-timestamp",
+
+  validSvg: `<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="100" fill="#3b82f6"/>
+</svg>`,
+
+  invalidSvg: `<svg width="100" height="100">
+  <invalid-tag/>
+</svg>`,
 };

@@ -11,6 +11,7 @@ import {
   Binary,
   KeyRound,
   Clock,
+  FileImage,
 } from "lucide-react";
 
 export const tools = [
@@ -97,6 +98,12 @@ export const tools = [
     path: "/unix-timestamp",
     description: "Convert between Unix timestamps and dates",
     icon: Clock,
+  },
+  {
+    name: "SVG to PNG",
+    path: "/svg-to-png",
+    description: "Convert SVG images to PNG format with custom size and background",
+    icon: FileImage,
   },
 ] as const;
 
