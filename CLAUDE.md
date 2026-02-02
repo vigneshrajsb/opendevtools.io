@@ -89,18 +89,44 @@ This layout ensures predictable UX - users always find Clear on the left and Cop
 ## Adding New Tools
 
 1. Create route folder: `src/app/(tools)/[tool-name]/page.tsx`
-2. Add tool to `src/lib/tools-config.ts` with:
+2. **Create SEO layout**: `src/app/(tools)/[tool-name]/layout.tsx` (see below)
+3. Add tool to `src/lib/tools-config.ts` with:
    - name: Display name
    - path: URL path (root level)
    - description: Brief description
    - icon: Lucide icon component
-3. Implement tool as a client component with:
+4. Implement tool as a client component with:
    - Input area (textarea or appropriate input)
    - Output area with CopyButton
    - Error handling for invalid input
    - **State persistence using `useToolState` hook** (see below)
-4. All processing must happen client-side
-5. **Add E2E tests** (see Testing section below)
+5. All processing must happen client-side
+6. **Add E2E tests** (see Testing section below)
+7. **Update test fixtures**: Add tool to `e2e/fixtures/test-data.ts` tools array
+8. **Update README**: Add tool to "Available Tools" section in README.md
+
+### SEO Metadata (Required)
+
+Every tool needs a `layout.tsx` file for SEO metadata:
+
+```typescript
+// src/app/(tools)/[tool-name]/layout.tsx
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tool Name",
+  description:
+    "Brief description of what the tool does. Free online tool.",
+  openGraph: {
+    title: "Tool Name | OpenDevTools",
+    description: "Short description for social sharing.",
+  },
+};
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return children;
+}
+```
 
 ### State Persistence
 
