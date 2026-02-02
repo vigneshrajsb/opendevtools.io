@@ -25,6 +25,11 @@ Free, open-source developer tools. All processing happens in your browser.
 - [**Lorem Ipsum**](https://opendevtools.io/lorem-ipsum) - Generate placeholder text
 - [**Markdown Preview**](https://opendevtools.io/markdown-preview) - Preview markdown with live rendering
 - [**JavaScript Sandbox**](https://opendevtools.io/js-sandbox) - Execute JavaScript code in a sandboxed environment
+- [**Escape/Unescape Newlines**](https://opendevtools.io/escape-newlines) - Escape or unescape newline characters in text
+- [**Base64 Encode/Decode**](https://opendevtools.io/base64-encode-decode) - Encode text to Base64 or decode Base64 strings
+- [**JWT Debugger**](https://opendevtools.io/jwt-debugger) - Decode and verify JSON Web Tokens
+- [**Unix Timestamp**](https://opendevtools.io/unix-timestamp) - Convert between Unix timestamps and dates
+- [**String Inspector**](https://opendevtools.io/string-inspector) - Analyze text: character counts, encoding, and word distribution
 
 ## Tech Stack
 
