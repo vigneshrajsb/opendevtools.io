@@ -11,6 +11,7 @@ import {
   Binary,
   KeyRound,
   Clock,
+  TextSearch,
 } from "lucide-react";
 
 export const tools = [
@@ -97,6 +98,12 @@ export const tools = [
     path: "/unix-timestamp",
     description: "Convert between Unix timestamps and dates",
     icon: Clock,
+  },
+  {
+    name: "String Inspector",
+    path: "/string-inspector",
+    description: "Analyze text: character counts, encoding, and word distribution",
+    icon: TextSearch,
   },
 ] as const;
 

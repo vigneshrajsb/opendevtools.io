@@ -13,6 +13,7 @@ export const tools = [
   { name: "Base64 Encode/Decode", path: "/base64-encode-decode" },
   { name: "JWT Debugger", path: "/jwt-debugger" },
   { name: "Unix Timestamp", path: "/unix-timestamp" },
+  { name: "String Inspector", path: "/string-inspector" },
 ] as const;
 
 export const testData = {
