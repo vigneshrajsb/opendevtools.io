@@ -14,6 +14,8 @@ export const tools = [
   { name: "JWT Debugger", path: "/jwt-debugger" },
   { name: "Unix Timestamp", path: "/unix-timestamp" },
   { name: "String Inspector", path: "/string-inspector" },
+  { name: "Regex Tester", path: "/regex-tester" },
+  { name: "URL Parser", path: "/url-parser" },
 ] as const;
 
 export const testData = {
@@ -142,4 +144,13 @@ jwIDAQAB
   unixTimestampDate: "2024-01-01",
   unixTimestampISO: "2024-01-01T00:00:00.000Z",
   invalidTimestamp: "not-a-timestamp",
+
+  regexPattern: "(\\w+)@(\\w+\\.\\w+)",
+  regexTestString: "Contact: user@example.com and admin@test.org",
+  regexInvalidPattern: "[unclosed",
+
+  urlValid:
+    "https://example.com:8080/path/file.html?key=value&arr[]=1&arr[]=2#section",
+  urlInvalid: "not a url",
+  urlNoQuery: "https://example.com/path",
 };

@@ -12,6 +12,8 @@ import {
   KeyRound,
   Clock,
   TextSearch,
+  Regex,
+  Link,
 } from "lucide-react";
 
 export const tools = [
@@ -104,6 +106,18 @@ export const tools = [
     path: "/string-inspector",
     description: "Analyze text: character counts, encoding, and word distribution",
     icon: TextSearch,
+  },
+  {
+    name: "Regex Tester",
+    path: "/regex-tester",
+    description: "Test and debug regular expressions with live matching",
+    icon: Regex,
+  },
+  {
+    name: "URL Parser",
+    path: "/url-parser",
+    description: "Parse and analyze URL components and query parameters",
+    icon: Link,
   },
 ] as const;
 
