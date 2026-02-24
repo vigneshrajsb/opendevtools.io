@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -8,13 +9,19 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { ClearButton } from "@/components/shared/clear-button";
 import { CopyButton } from "@/components/shared/copy-button";
 import { useToolState } from "@/hooks/use-tool-state";
 import { useSyncScroll } from "@/hooks/use-sync-scroll";
-import { FileCode, Lock, LockOpen } from "lucide-react";
+import { FileCode, Lock, LockOpen, Maximize2, Minimize2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import type { Components } from "react-markdown";
 
 const EXAMPLE_MARKDOWN = `# Markdown Preview
 
@@ -78,6 +85,60 @@ console.log(greet("World"));
 That's it! Start typing your markdown on the left.
 `;
 
+const markdownComponents: Components = {
+  pre: ({ children }) => (
+    <pre className="bg-muted rounded-md p-3 overflow-x-auto">{children}</pre>
+  ),
+  code: ({ children, className }) => {
+    const isInline = !className;
+    return isInline ? (
+      <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono">
+        {children}
+      </code>
+    ) : (
+      <code className="font-mono text-sm">{children}</code>
+    );
+  },
+  table: ({ children }) => (
+    <table className="border-collapse border border-border w-full">
+      {children}
+    </table>
+  ),
+  th: ({ children }) => (
+    <th className="border border-border bg-muted px-3 py-2 text-left font-semibold">
+      {children}
+    </th>
+  ),
+  td: ({ children }) => (
+    <td className="border border-border px-3 py-2">{children}</td>
+  ),
+  blockquote: ({ children }) => (
+    <blockquote className="border-l-4 border-border pl-4 italic text-muted-foreground">
+      {children}
+    </blockquote>
+  ),
+  a: ({ href, children }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-primary underline underline-offset-4 hover:text-primary/80"
+    >
+      {children}
+    </a>
+  ),
+  hr: () => <hr className="border-border my-4" />,
+  li: ({ children, className }) => <li className={className}>{children}</li>,
+  input: ({ type, checked }) => {
+    if (type === "checkbox") {
+      return (
+        <input type="checkbox" checked={checked} readOnly className="mr-2" />
+      );
+    }
+    return <input type={type} />;
+  },
+};
+
 export default function MarkdownPreviewPage() {
   const { input, setInput, settings, setSetting, clear } =
     useToolState("/markdown-preview");
@@ -86,6 +147,21 @@ export default function MarkdownPreviewPage() {
   const setSyncScroll = (value: boolean) => setSetting("syncScroll", String(value));
 
   const { registerRef } = useSyncScroll({ enabled: syncScroll });
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const expanded = searchParams.get("expanded") === "true";
+
+  const setExpanded = (value: boolean) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) {
+      params.set("expanded", "true");
+    } else {
+      params.delete("expanded");
+    }
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
 
   const handleClear = () => {
     clear();
@@ -136,7 +212,22 @@ export default function MarkdownPreviewPage() {
                 : "Scroll sync disabled - click to enable"}
             </TooltipContent>
           </Tooltip>
-          <CopyButton text={input} showLabel className="ml-auto" />
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                data-testid="btn-expand"
+                variant="outline"
+                onClick={() => setExpanded(true)}
+                disabled={!input.trim()}
+                className="ml-auto"
+              >
+                <Maximize2 className="h-4 w-4 mr-2" />
+                Expand
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Expand preview to fullscreen</TooltipContent>
+          </Tooltip>
+          <CopyButton text={input} showLabel />
         </div>
       </TooltipProvider>
 
@@ -163,79 +254,10 @@ export default function MarkdownPreviewPage() {
               <div className="prose prose-sm max-w-none">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
-                  components={{
-                  // Style code blocks
-                  pre: ({ children }) => (
-                    <pre className="bg-muted rounded-md p-3 overflow-x-auto">
-                      {children}
-                    </pre>
-                  ),
-                  code: ({ children, className }) => {
-                    const isInline = !className;
-                    return isInline ? (
-                      <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono">
-                        {children}
-                      </code>
-                    ) : (
-                      <code className="font-mono text-sm">{children}</code>
-                    );
-                  },
-                  // Style tables
-                  table: ({ children }) => (
-                    <table className="border-collapse border border-border w-full">
-                      {children}
-                    </table>
-                  ),
-                  th: ({ children }) => (
-                    <th className="border border-border bg-muted px-3 py-2 text-left font-semibold">
-                      {children}
-                    </th>
-                  ),
-                  td: ({ children }) => (
-                    <td className="border border-border px-3 py-2">
-                      {children}
-                    </td>
-                  ),
-                  // Style blockquotes
-                  blockquote: ({ children }) => (
-                    <blockquote className="border-l-4 border-border pl-4 italic text-muted-foreground">
-                      {children}
-                    </blockquote>
-                  ),
-                  // Style links
-                  a: ({ href, children }) => (
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary underline underline-offset-4 hover:text-primary/80"
-                    >
-                      {children}
-                    </a>
-                  ),
-                  // Style horizontal rules
-                  hr: () => <hr className="border-border my-4" />,
-                  // Style task list items
-                  li: ({ children, className }) => (
-                    <li className={className}>{children}</li>
-                  ),
-                  input: ({ type, checked }) => {
-                    if (type === "checkbox") {
-                      return (
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          readOnly
-                          className="mr-2"
-                        />
-                      );
-                    }
-                    return <input type={type} />;
-                  },
-                }}
-              >
-                {input}
-              </ReactMarkdown>
+                  components={markdownComponents}
+                >
+                  {input}
+                </ReactMarkdown>
               </div>
             ) : (
               <p className="text-sm text-muted-foreground">
@@ -245,6 +267,34 @@ export default function MarkdownPreviewPage() {
           </div>
         </div>
       </div>
+
+      <Dialog open={expanded} onOpenChange={setExpanded}>
+        <DialogContent
+          className="inset-0 translate-x-0 translate-y-0 max-w-none sm:max-w-none rounded-none border-0 p-0 flex flex-col gap-0 h-dvh"
+          showCloseButton={false}
+        >
+          <DialogTitle className="sr-only">Markdown Preview</DialogTitle>
+          <div className="flex items-center justify-end gap-2 border-b px-6 py-3">
+            <CopyButton text={input} showLabel />
+            <Button variant="ghost" size="icon" onClick={() => setExpanded(false)}>
+              <Minimize2 className="h-4 w-4" />
+              <span className="sr-only">Close expanded preview</span>
+            </Button>
+          </div>
+          <div className="flex-1 overflow-auto px-8 py-8">
+            <div className="mx-auto max-w-3xl">
+              <div className="prose prose-base max-w-none">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={markdownComponents}
+                >
+                  {input}
+                </ReactMarkdown>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
