@@ -14,6 +14,7 @@ import {
   TextSearch,
   Regex,
   Link,
+  Workflow,
 } from "lucide-react";
 
 export const tools = [
@@ -70,6 +71,12 @@ export const tools = [
     path: "/markdown-preview",
     description: "Preview markdown with live rendering",
     icon: FileText,
+  },
+  {
+    name: "Mermaid Diagram Preview",
+    path: "/mermaid-preview",
+    description: "Render Mermaid diagrams with live preview",
+    icon: Workflow,
   },
   {
     name: "JavaScript Sandbox",

@@ -24,6 +24,7 @@ Free, open-source developer tools. All processing happens in your browser.
 - [**Text Diff Checker**](https://opendevtools.io/text-diff) - Compare two text blocks and see differences
 - [**Lorem Ipsum**](https://opendevtools.io/lorem-ipsum) - Generate placeholder text
 - [**Markdown Preview**](https://opendevtools.io/markdown-preview) - Preview markdown with live rendering
+- [**Mermaid Diagram Preview**](https://opendevtools.io/mermaid-preview) - Render Mermaid diagrams with live preview
 - [**JavaScript Sandbox**](https://opendevtools.io/js-sandbox) - Execute JavaScript code in a sandboxed environment
 - [**Escape/Unescape Newlines**](https://opendevtools.io/escape-newlines) - Escape or unescape newline characters in text
 - [**Base64 Encode/Decode**](https://opendevtools.io/base64-encode-decode) - Encode text to Base64 or decode Base64 strings

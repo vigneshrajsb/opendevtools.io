@@ -19,6 +19,7 @@ interface CopyImageButtonProps {
   backgroundColor?: string;
   pixelRatio?: number;
   showWatermark?: boolean;
+  disabled?: boolean;
 }
 
 export function CopyImageButton({
@@ -28,6 +29,7 @@ export function CopyImageButton({
   filename = "screenshot.png",
   backgroundColor,
   pixelRatio = 2,
+  disabled = false,
 }: CopyImageButtonProps) {
   const [status, setStatus] = useState<
     "idle" | "capturing" | "copied" | "downloaded"
@@ -120,7 +122,7 @@ export function CopyImageButton({
     URL.revokeObjectURL(url);
   };
 
-  const isDisabled = !targetRef.current || status === "capturing";
+  const isDisabled = disabled || status === "capturing";
 
   const getIcon = () => {
     switch (status) {

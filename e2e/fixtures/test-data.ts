@@ -8,6 +8,7 @@ export const tools = [
   { name: "Text Diff Checker", path: "/text-diff" },
   { name: "Lorem Ipsum Generator", path: "/lorem-ipsum" },
   { name: "Markdown Preview", path: "/markdown-preview" },
+  { name: "Mermaid Diagram Preview", path: "/mermaid-preview" },
   { name: "JavaScript Sandbox", path: "/js-sandbox" },
   { name: "Escape/Unescape Newlines", path: "/escape-newlines" },
   { name: "Base64 Encode/Decode", path: "/base64-encode-decode" },
@@ -57,6 +58,23 @@ This is a **bold** text and *italic* text.
 
 - Item 1
 - Item 2`,
+
+  mermaidSample: `sequenceDiagram
+  participant U as User
+  participant API as API
+  U->>API: Request diagram
+  API-->>U: Rendered SVG`,
+
+  mermaidFencedSample: `\`\`\`mermaid
+sequenceDiagram
+  participant U as User
+  participant API as API
+  U->>API: Request diagram
+  API-->>U: Rendered SVG
+\`\`\``,
+
+  mermaidInvalid: `sequenceDiagram
+  U-->>`,
 
   jsSample: `console.log("Hello from sandbox!");
 const sum = (a, b) => a + b;

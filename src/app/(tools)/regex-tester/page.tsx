@@ -380,7 +380,9 @@ export default function RegexTesterPage() {
               </ToggleGroup>
             </div>
             {error && (
-              <p className="text-sm text-red-500">{error}</p>
+              <p data-testid="regex-error" className="text-sm text-red-500">
+                {error}
+              </p>
             )}
           </div>
 
