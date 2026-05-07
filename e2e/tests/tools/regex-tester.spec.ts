@@ -48,10 +48,13 @@ test.describe("Regex Tester", { tag: ["@tools"] }, () => {
   });
 
   test("shows error for invalid regex", async ({ page }) => {
-    await page.getByTestId("regex-pattern").fill(testData.regexInvalidPattern);
+    const patternInput = page.getByTestId("regex-pattern");
+
+    await patternInput.pressSequentially(testData.regexInvalidPattern, { delay: 5 });
+    await expect(patternInput).toHaveValue(testData.regexInvalidPattern);
     await page.getByTestId("tool-input").fill("test");
 
-    await expect(page.locator(".text-red-500")).toBeVisible();
+    await expect(page.getByTestId("regex-error")).toBeVisible();
   });
 
   test("flags affect matching behavior", async ({ toolPage, page }) => {
